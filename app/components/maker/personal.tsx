@@ -22,7 +22,7 @@ export default function MakerPersonal() {
         </div>
         <div className="col-span-3 flex flex-col gap-4">
           <div className="grid gap-2">
-            <Label htmlFor="name">{t('general.name')}</Label>
+            <Label htmlFor="name" required>{t('general.name')}</Label>
             <Input
               id="name"
               type="text"
@@ -32,7 +32,7 @@ export default function MakerPersonal() {
             />
           </div>
           <div className="grid gap-2">
-            <Label htmlFor="email">{t('personalInformation.email_address')}</Label>
+            <Label htmlFor="email" required>{t('personalInformation.email_address')}</Label>
             <Input
               id="email"
               type="email"

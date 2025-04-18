@@ -13,6 +13,7 @@ import {
   CardHeader,
   CardTitle,
 } from "~/components/ui/card"
+import { useFormStore } from "~/hooks/use-form-store";
 
 export function AppPage() {
   const { t } = useTranslation();
@@ -41,6 +42,8 @@ export function AppPage() {
   ]
 
   const [currentStep, setCurrentStep] = useState(0);
+  const { formData } = useFormStore();
+
   const nextStep = () => {
     if (currentStep < steps.length - 1) {
       setCurrentStep(currentStep + 1);
@@ -65,7 +68,7 @@ export function AppPage() {
         <Button onClick={prevStep} size={'sm'} className="mr-2" disabled={currentStep === 0}>
             {t('navigation.back')}
         </Button>
-        <Button onClick={nextStep} size={'sm'} disabled={currentStep === steps.length - 1}>
+        <Button onClick={nextStep} size={'sm'} disabled={currentStep === steps.length - 1 || formData.name === '' || formData.email === ''}>
             {t('navigation.continue')}
         </Button>
       </CardFooter>
