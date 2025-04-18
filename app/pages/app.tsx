@@ -39,6 +39,10 @@ export function AppPage() {
         title: t('otherExperience.other_experience'),
         component: <MakerExperience />
     },
+    {
+        title: "Template",
+        component: <>template</>
+    }
   ]
 
   const [currentStep, setCurrentStep] = useState(0);
@@ -46,6 +50,7 @@ export function AppPage() {
 
   const nextStep = () => {
     if (currentStep < steps.length - 1) {
+      console.log(formData)
       setCurrentStep(currentStep + 1);
     }
   }
@@ -68,7 +73,7 @@ export function AppPage() {
         <Button onClick={prevStep} size={'sm'} className="mr-2" disabled={currentStep === 0}>
             {t('navigation.back')}
         </Button>
-        <Button onClick={nextStep} size={'sm'} disabled={currentStep === steps.length - 1 || formData.name === '' || formData.email === ''}>
+        <Button onClick={nextStep} size={'sm'} disabled={currentStep === steps.length - 1 || (currentStep !== 0 && (formData.name === '' || formData.email === ''))}>
             {t('navigation.continue')}
         </Button>
       </CardFooter>
