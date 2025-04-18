@@ -50,9 +50,9 @@ export default function MakerExperienceOther() {
 
   const addOtherExperience = () => {
     updateField("other_experiences", [
-      ...formData.other_experiences,
+      ...formData?.other_experiences!,
       {
-        id: formData.other_experiences.length.toString(),
+        id: formData?.other_experiences.length.toString(),
         category: "",
         year: "",
         elaboration: "",
@@ -67,7 +67,7 @@ export default function MakerExperienceOther() {
       onDragEnd={handleDragEnd}
     >
       <SortableContext
-        items={formData.other_experiences.map((x) => x.id)}
+        items={formData?.other_experiences.map((x) => x.id)!}
         strategy={verticalListSortingStrategy}
       >
         <div className="flex flex-col gap-2">
@@ -77,7 +77,7 @@ export default function MakerExperienceOther() {
               <PlusCircle /> {t('general.add')}
             </Button>
           </div>
-          {formData.other_experiences.map((x, idx) => (
+          {formData?.other_experiences.map((x, idx) => (
             <SortableItem key={idx} item={x} />
           ))}
         </div>
@@ -89,16 +89,16 @@ export default function MakerExperienceOther() {
     const { active, over } = event;
     if (active.id === over.id) return;
 
-    const oldIndex = formData.other_experiences.findIndex(
+    const oldIndex = formData?.other_experiences.findIndex(
       (item) => item.id === active.id
     );
-    const newIndex = formData.other_experiences.findIndex(
+    const newIndex = formData?.other_experiences.findIndex(
       (item) => item.id === over.id
     );
 
     updateField(
       "other_experiences",
-      arrayMove(formData.other_experiences, oldIndex, newIndex)
+      arrayMove(formData?.other_experiences!, oldIndex!, newIndex!)
     );
   }
 }
@@ -117,7 +117,7 @@ function SortableItem(props: { item: OtherExperience }) {
   const deleteOtherExperience = (id: string) => {
     updateField(
       "other_experiences",
-      formData.other_experiences.filter((item) => item.id !== id)
+      formData?.other_experiences.filter((item) => item.id !== id)
     );
   };
 

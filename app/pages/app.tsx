@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate, useSearchParams } from "react-router";
 import MakerEducation from "~/components/maker/education";
 import MakerExperience from "~/components/maker/experience";
 import MakerLanguage from "~/components/maker/language";
@@ -46,7 +47,13 @@ export function AppPage() {
   ]
 
   const [currentStep, setCurrentStep] = useState(0);
-  const { formData } = useFormStore();
+  const { formData, setActiveForm } = useFormStore();
+  const [searchParams] = useSearchParams();
+  const naviagte = useNavigate();
+
+  useEffect(() => {
+    setActiveForm(searchParams.get('draft') as string);
+  }, [])
 
   const nextStep = () => {
     if (currentStep < steps.length - 1) {
@@ -58,6 +65,8 @@ export function AppPage() {
   const prevStep = () => {
     if (currentStep > 0) {
       setCurrentStep(currentStep - 1);
+    } else {
+      naviagte('/')
     }
   }
   
@@ -70,10 +79,10 @@ export function AppPage() {
           {steps[currentStep].component}
       </CardContent>
       <CardFooter className="flex justify-between items-center">
-        <Button onClick={prevStep} size={'sm'} className="mr-2" disabled={currentStep === 0}>
+        <Button onClick={prevStep} size={'sm'} className="mr-2">
             {t('navigation.back')}
         </Button>
-        <Button onClick={nextStep} size={'sm'} disabled={currentStep === steps.length - 1 || (currentStep !== 0 && (formData.name === '' || formData.email === ''))}>
+        <Button onClick={nextStep} size={'sm'} disabled={currentStep === steps.length - 1 || (currentStep !== 0 && (formData?.name === '' || formData?.email === ''))}>
             {t('navigation.continue')}
         </Button>
       </CardFooter>

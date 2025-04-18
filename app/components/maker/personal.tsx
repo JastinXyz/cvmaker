@@ -26,7 +26,7 @@ export default function MakerPersonal() {
             <Input
               id="name"
               type="text"
-              value={formData.name}
+              value={formData?.name}
               onChange={(e) => updateField('name', e.target.value)}
               placeholder="John Doe"
             />
@@ -36,7 +36,7 @@ export default function MakerPersonal() {
             <Input
               id="email"
               type="email"
-              value={formData.email}
+              value={formData?.email}
               onChange={(e) => updateField('email', e.target.value)}
               placeholder="johndoe@example.com"
             />
@@ -49,7 +49,7 @@ export default function MakerPersonal() {
           <Input
             id="phone"
             type="text"
-            value={formData.phone}
+            value={formData?.phone}
             onChange={(e) => updateField('phone', e.target.value)}
             placeholder="+6281234567890"
           />
@@ -60,7 +60,7 @@ export default function MakerPersonal() {
             <Input
               id="linkedin"
               type="text"
-              value={formData.linkedin}
+              value={formData?.linkedin}
               onChange={(e) => updateField('linkedin', e.target.value)}
               placeholder="linkedin.com/xxxxxxx"
             />
@@ -70,7 +70,7 @@ export default function MakerPersonal() {
             <Input
               id="website"
               type="text"
-              value={formData.website}
+              value={formData?.website}
               onChange={(e) => updateField('website', e.target.value)}
               placeholder="https://example.com"
             />
@@ -81,7 +81,7 @@ export default function MakerPersonal() {
           <Input
             id="address"
             type="text"
-            value={formData.address}
+            value={formData?.address}
             onChange={(e) => updateField('address', e.target.value)}
             placeholder="Jl. Example No. 123, Jakarta"
           />
@@ -90,7 +90,7 @@ export default function MakerPersonal() {
           <Label htmlFor="short_description">{t('general.description')}</Label>
           <Textarea 
             id="short_description" 
-            value={formData.short_description}
+            value={formData?.short_description}
             onChange={(e) => updateField('short_description', e.target.value)}
             placeholder="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequuntur placeat perspiciatis dolorum dignissimos possimus voluptatem excepturi, doloremque esse corrupti hic." />
         </div>
@@ -157,9 +157,9 @@ function InputAvatar() {
         <>
           <Dialog open={openImageDialog} onOpenChange={setOpenImageDialog}>
               <DialogTrigger asChild>
-                {formData.croppedImage ? (
+                {formData?.croppedImage ? (
                   <img
-                    src={formData.croppedImage}
+                    src={formData?.croppedImage}
                     alt="Avatar"
                     className="w-38 h-38 rounded border-2"
                   />

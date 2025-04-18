@@ -49,8 +49,8 @@ export default function MakerExperienceLanguages() {
 
   const addLanguages = () => {
     updateField("languages", [
-      ...formData.languages,
-      { id: formData.languages.length.toString(), name: "", level: "" },
+      ...formData?.languages!,
+      { id: formData?.languages.length.toString(), name: "", level: "" },
     ]);
   };
 
@@ -61,7 +61,7 @@ export default function MakerExperienceLanguages() {
       onDragEnd={handleDragEnd}
     >
       <SortableContext
-        items={formData.languages.map((x) => x.id)}
+        items={formData?.languages.map((x) => x.id)!}
         strategy={verticalListSortingStrategy}
       >
         <div className="flex flex-col gap-2">
@@ -71,7 +71,7 @@ export default function MakerExperienceLanguages() {
               <PlusCircle /> {t('general.add')}
             </Button>
           </div>
-          {formData.languages.map((x, idx) => (
+          {formData?.languages.map((x, idx) => (
             <SortableItem key={idx} item={x} />
           ))}
         </div>
@@ -83,14 +83,14 @@ export default function MakerExperienceLanguages() {
     const { active, over } = event;
     if (active.id === over.id) return;
 
-    const oldIndex = formData.languages.findIndex(
+    const oldIndex = formData?.languages.findIndex(
       (item) => item.id === active.id
     );
-    const newIndex = formData.languages.findIndex(
+    const newIndex = formData?.languages.findIndex(
       (item) => item.id === over.id
     );
 
-    updateField("languages", arrayMove(formData.languages, oldIndex, newIndex));
+    updateField("languages", arrayMove(formData?.languages!, oldIndex!, newIndex!));
   }
 }
 
@@ -108,7 +108,7 @@ function SortableItem(props: { item: Language }) {
   const deleteLanguages = (id: string) => {
     updateField(
       "languages",
-      formData.languages.filter((item) => item.id !== id)
+      formData?.languages.filter((item) => item.id !== id)
     );
   };
 

@@ -42,9 +42,9 @@ export default function MakerExperienceCustom() {
 
   const addCustomExperiences = () => {
     updateField("custom_experiences", [
-      ...formData.custom_experiences,
+      ...formData?.custom_experiences!,
       {
-        id: formData.custom_experiences.length.toString(),
+        id: formData?.custom_experiences.length.toString(),
         title: "",
         description: "",
       },
@@ -58,7 +58,7 @@ export default function MakerExperienceCustom() {
       onDragEnd={handleDragEnd}
     >
       <SortableContext
-        items={formData.custom_experiences.map((x) => x.id)}
+        items={formData?.custom_experiences.map((x) => x.id)!}
         strategy={verticalListSortingStrategy}
       >
         <div className="flex flex-col gap-2">
@@ -68,7 +68,7 @@ export default function MakerExperienceCustom() {
               <PlusCircle /> {t('general.add')}
             </Button>
           </div>
-          {formData.custom_experiences.map((x, idx) => (
+          {formData?.custom_experiences.map((x, idx) => (
             <SortableItem key={idx} item={x} />
           ))}
         </div>
@@ -80,16 +80,16 @@ export default function MakerExperienceCustom() {
     const { active, over } = event;
     if (active.id === over.id) return;
 
-    const oldIndex = formData.custom_experiences.findIndex(
+    const oldIndex = formData?.custom_experiences.findIndex(
       (item) => item.id === active.id
     );
-    const newIndex = formData.custom_experiences.findIndex(
+    const newIndex = formData?.custom_experiences.findIndex(
       (item) => item.id === over.id
     );
 
     updateField(
       "custom_experiences",
-      arrayMove(formData.custom_experiences, oldIndex, newIndex)
+      arrayMove(formData?.custom_experiences!, oldIndex!, newIndex!)
     );
   }
 }
@@ -108,7 +108,7 @@ function SortableItem(props: { item: CustomExperience }) {
   const deleteCustomExperiences = (id: string) => {
     updateField(
       "custom_experiences",
-      formData.custom_experiences.filter((item) => item.id !== id)
+      formData?.custom_experiences.filter((item) => item.id !== id)
     );
   };
 

@@ -43,8 +43,8 @@ export default function MakerEducation() {
 
     const addEducation = () => {
         updateField('education', [
-            ...formData.education,
-            { id: formData.education.length.toString(), name: '', degree: '', location: '', description: '', startMonth: '', startYear: '', endMonth: '', endYear: '' }
+            ...formData?.education!,
+            { id: formData?.education.length.toString(), name: '', degree: '', location: '', description: '', startMonth: '', startYear: '', endMonth: '', endYear: '' }
         ]);
     }
 
@@ -55,11 +55,11 @@ export default function MakerEducation() {
             onDragEnd={handleDragEnd}
         >
             <SortableContext
-                items={formData.education.map((x) => x.id)}
+                items={formData?.education.map((x) => x.id)!}
                 strategy={verticalListSortingStrategy}
             >
                 <div className="flex flex-col gap-2">
-                    {formData.education.map((x, idx) => <SortableItem key={idx} item={x} />)}
+                    {formData?.education.map((x, idx) => <SortableItem key={idx} item={x} />)}
                     <button onClick={addEducation} className="cursor-pointer mt-2 rounded border-dashed border-2 p-3 flex gap-2 items-center text-sm">
                         <PlusCircle className="w-5 h-5" />
                         <span>{t('general.add')} {t('education.education')}</span>
@@ -73,10 +73,10 @@ export default function MakerEducation() {
         const { active, over } = event;
         if (active.id === over.id) return;
 
-        const oldIndex = formData.education.findIndex((item) => item.id === active.id);
-        const newIndex = formData.education.findIndex((item) => item.id === over.id);
+        const oldIndex = formData?.education.findIndex((item) => item.id === active.id);
+        const newIndex = formData?.education.findIndex((item) => item.id === over.id);
 
-        updateField('education', arrayMove(formData.education, oldIndex, newIndex));
+        updateField('education', arrayMove(formData?.education!, oldIndex!, newIndex!));
     }
 }
 
@@ -97,7 +97,7 @@ function SortableItem(props: { item: Education }) {
     };
 
     const deleteEducation = (id: string) => {
-        updateField('education', formData.education.filter((item) => item.id !== id));
+        updateField('education', formData?.education.filter((item) => item.id !== id));
     };
 
     return (

@@ -29,6 +29,7 @@ import QuillEditor from "../quill-editor";
 import MonthSelect from '../month-select';
 import YearSelect from '../year-select';
 import { useTranslation } from 'react-i18next';
+import { Button } from '../ui/button';
 
 export default function MakerWork() {
   const { t } = useTranslation();
@@ -43,8 +44,8 @@ export default function MakerWork() {
 
   const addWorkExperience = () => {
     updateField('work_experience', [
-      ...formData.work_experience,
-      { id: formData.work_experience.length.toString(), company: '', position: '', location: '', description: '', startMonth: '', startYear: '', endMonth: '', endYear: '' }
+      ...formData?.work_experience!,
+      { id: formData?.work_experience.length.toString(), company: '', position: '', location: '', description: '', startMonth: '', startYear: '', endMonth: '', endYear: '' }
     ]);
   }
 
@@ -55,11 +56,11 @@ export default function MakerWork() {
       onDragEnd={handleDragEnd}
     >
       <SortableContext
-        items={formData.work_experience.map((x) => x.id)}
+        items={formData?.work_experience.map((x) => x.id)!}
         strategy={verticalListSortingStrategy}
       >
         <div className="flex flex-col gap-2">
-          {formData.work_experience.map((x, idx) => <SortableItem key={idx} item={x} />)}
+          {formData?.work_experience.map((x, idx) => <SortableItem key={idx} item={x} />)}
           <button onClick={addWorkExperience} className="cursor-pointer mt-2 rounded border-dashed border-2 p-3 flex gap-2 items-center text-sm">
             <PlusCircle className="w-5 h-5" />
             <span>{t('general.add')} {t('workExperience.work_experience')}</span>
@@ -73,10 +74,10 @@ export default function MakerWork() {
     const { active, over } = event;
     if (active.id === over.id) return;
 
-    const oldIndex = formData.work_experience.findIndex((item) => item.id === active.id);
-    const newIndex = formData.work_experience.findIndex((item) => item.id === over.id);
+    const oldIndex = formData?.work_experience.findIndex((item) => item.id === active.id);
+    const newIndex = formData?.work_experience.findIndex((item) => item.id === over.id);
 
-    updateField('work_experience', arrayMove(formData.work_experience, oldIndex, newIndex));
+    updateField('work_experience', arrayMove(formData?.work_experience!, oldIndex!, newIndex!));
   }
 }
 
@@ -97,7 +98,7 @@ function SortableItem(props: { item: WorkExperience }) {
   };
 
   const deleteWorkExperience = (id: string) => {
-    updateField('work_experience', formData.work_experience.filter((item) => item.id !== id));
+    updateField('work_experience', formData?.work_experience.filter((item) => item.id !== id));
   };
 
   return (
@@ -163,7 +164,6 @@ function SortableItem(props: { item: WorkExperience }) {
           </AccordionContent>
         </AccordionItem>
       </Accordion>
-
     </div>
   );
 }

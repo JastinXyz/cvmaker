@@ -41,8 +41,8 @@ export default function MakerExperienceInterest() {
 
   const addInterest = () => {
     updateField("interest", [
-      ...formData.interest,
-      { id: formData.interest.length.toString(), name: "" },
+      ...formData?.interest!,
+      { id: formData?.interest.length.toString(), name: "" },
     ]);
   };
 
@@ -53,7 +53,7 @@ export default function MakerExperienceInterest() {
       onDragEnd={handleDragEnd}
     >
       <SortableContext
-        items={formData.interest.map((x) => x.id)}
+        items={formData?.interest.map((x) => x.id)!}
         strategy={verticalListSortingStrategy}
       >
         <div className="flex flex-col gap-2">
@@ -63,7 +63,7 @@ export default function MakerExperienceInterest() {
               <PlusCircle /> {t('general.add')}
             </Button>
           </div>
-          {formData.interest.map((x, idx) => (
+          {formData?.interest.map((x, idx) => (
             <SortableItem key={idx} item={x} />
           ))}
         </div>
@@ -75,12 +75,12 @@ export default function MakerExperienceInterest() {
     const { active, over } = event;
     if (active.id === over.id) return;
 
-    const oldIndex = formData.interest.findIndex(
+    const oldIndex = formData?.interest.findIndex(
       (item) => item.id === active.id
     );
-    const newIndex = formData.interest.findIndex((item) => item.id === over.id);
+    const newIndex = formData?.interest.findIndex((item) => item.id === over.id);
 
-    updateField("interest", arrayMove(formData.interest, oldIndex, newIndex));
+    updateField("interest", arrayMove(formData?.interest!, oldIndex!, newIndex!));
   }
 }
 
@@ -98,7 +98,7 @@ function SortableItem(props: { item: Interest }) {
   const deleteInterest = (id: string) => {
     updateField(
       "interest",
-      formData.interest.filter((item) => item.id !== id)
+      formData?.interest.filter((item) => item.id !== id)
     );
   };
 

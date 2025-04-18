@@ -49,8 +49,8 @@ export default function MakerExperienceSkills() {
 
   const addSkills = () => {
     updateField("skills", [
-      ...formData.skills,
-      { id: formData.skills.length.toString(), name: "", level: "" },
+      ...formData?.skills!,
+      { id: formData?.skills.length.toString(), name: "", level: "" },
     ]);
   };
 
@@ -61,7 +61,7 @@ export default function MakerExperienceSkills() {
       onDragEnd={handleDragEnd}
     >
       <SortableContext
-        items={formData.skills.map((x) => x.id)}
+        items={formData?.skills.map((x) => x.id)!}
         strategy={verticalListSortingStrategy}
       >
         <div className="flex flex-col gap-2">
@@ -71,7 +71,7 @@ export default function MakerExperienceSkills() {
               <PlusCircle /> {t('general.add')}
             </Button>
           </div>
-          {formData.skills.map((x, idx) => (
+          {formData?.skills.map((x, idx) => (
             <SortableItem key={idx} item={x} />
           ))}
         </div>
@@ -83,10 +83,10 @@ export default function MakerExperienceSkills() {
     const { active, over } = event;
     if (active.id === over.id) return;
 
-    const oldIndex = formData.skills.findIndex((item) => item.id === active.id);
-    const newIndex = formData.skills.findIndex((item) => item.id === over.id);
+    const oldIndex = formData?.skills.findIndex((item) => item.id === active.id);
+    const newIndex = formData?.skills.findIndex((item) => item.id === over.id);
 
-    updateField("skills", arrayMove(formData.skills, oldIndex, newIndex));
+    updateField("skills", arrayMove(formData?.skills!, oldIndex!, newIndex!));
   }
 }
 
@@ -104,7 +104,7 @@ function SortableItem(props: { item: Skills }) {
   const deleteSkills = (id: string) => {
     updateField(
       "skills",
-      formData.skills.filter((item) => item.id !== id)
+      formData?.skills.filter((item) => item.id !== id)
     );
   };
 
