@@ -47,12 +47,18 @@ export function AppPage() {
   ]
 
   const [currentStep, setCurrentStep] = useState(0);
-  const { formData, setActiveForm } = useFormStore();
+  const { formData, setActiveForm, formExists } = useFormStore();
   const [searchParams] = useSearchParams();
   const naviagte = useNavigate();
 
   useEffect(() => {
-    setActiveForm(searchParams.get('draft') as string);
+    let draftId = searchParams.get('draft') as string;
+
+    if (formExists(draftId)) {
+      setActiveForm(draftId);
+    } else {
+      naviagte('/');
+    }
   }, [])
 
   const nextStep = () => {

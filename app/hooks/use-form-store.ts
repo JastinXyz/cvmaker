@@ -8,6 +8,7 @@ interface FormStoreState {
   formData: FormData | null;
   setActiveForm: (formId: string) => void;
   deleteForm: (formId: string) => void;
+  formExists: (formId: string) => boolean;
   updateField: (
     field: keyof FormData,
     value: any,
@@ -54,6 +55,10 @@ export const useFormStore = create<FormStoreState>()(
         // optionally auto-set as active
         get().setActiveForm(formId);
       },
+
+      formExists(formId) {
+        return !!get().forms[formId];
+      },      
 
       setActiveForm(formId) {
         const form = get().forms[formId];
