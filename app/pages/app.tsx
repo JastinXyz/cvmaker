@@ -19,23 +19,23 @@ export function AppPage() {
 
   const steps = [
     {
-        title: t('language'),
+        title: t('general.language'),
         component: <MakerLanguage />,
     },
     {
-        title: t('personal_information'),
+        title: t('personalInformation.personal_information'),
         component: <MakerPersonal />
     },
     {
-        title: t('work_experience'),
+        title: t('workExperience.work_experience'),
         component: <MakerWork />
     },
     {
-        title: t('education'),
+        title: t('education.education'),
         component: <MakerEducation />
     },
     {
-        title: t('other_experience'),
+        title: t('otherExperience.other_experience'),
         component: <MakerExperience />
     },
   ]
@@ -63,10 +63,10 @@ export function AppPage() {
       </CardContent>
       <CardFooter className="flex justify-between items-center">
         <Button onClick={prevStep} size={'sm'} className="mr-2" disabled={currentStep === 0}>
-            {t('back')}
+            {t('navigation.back')}
         </Button>
         <Button onClick={nextStep} size={'sm'} disabled={currentStep === steps.length - 1}>
-            {t('continue')}
+            {t('navigation.continue')}
         </Button>
       </CardFooter>
     </Card>

@@ -28,8 +28,10 @@ import { useFormStore } from "~/hooks/use-form-store";
 import QuillEditor from "../quill-editor";
 import MonthSelect from '../month-select';
 import YearSelect from '../year-select';
+import { useTranslation } from 'react-i18next';
 
 export default function MakerEducation() {
+    const { t } = useTranslation();
     const { formData, updateField } = useFormStore();
 
     const sensors = useSensors(
@@ -60,7 +62,7 @@ export default function MakerEducation() {
                     {formData.education.map((x, idx) => <SortableItem key={idx} item={x} />)}
                     <button onClick={addEducation} className="cursor-pointer mt-2 rounded border-dashed border-2 p-3 flex gap-2 items-center text-sm">
                         <PlusCircle className="w-5 h-5" />
-                        <span>Add Education</span>
+                        <span>{t('general.add')} {t('education.education')}</span>
                     </button>
                 </div>
             </SortableContext>
@@ -79,6 +81,7 @@ export default function MakerEducation() {
 }
 
 function SortableItem(props: { item: Education }) {
+    const { t } = useTranslation();
     const { formData, updateField } = useFormStore();
     const {
         attributes,
@@ -112,7 +115,7 @@ function SortableItem(props: { item: Education }) {
                     <AccordionContent className="flex flex-col gap-2">
                         <div className="grid grid-cols-2 gap-2">
                             <div className="grid gap-2">
-                                <Label htmlFor="name">Scholl Name</Label>
+                                <Label htmlFor="name">{t('education.school_name')}</Label>
                                 <Input
                                     id="name"
                                     type="text"
@@ -122,7 +125,7 @@ function SortableItem(props: { item: Education }) {
                                 />
                             </div>
                             <div className="grid gap-2">
-                                <Label htmlFor="degree">Gelar/Jurusan</Label>
+                                <Label htmlFor="degree">{t('education.degree')}</Label>
                                 <Input
                                     id="degree"
                                     type="text"
@@ -134,7 +137,7 @@ function SortableItem(props: { item: Education }) {
                         </div>
                         <div>
                             <div className="grid gap-2">
-                                <Label htmlFor="location">Location</Label>
+                                <Label htmlFor="location">{t('workExperience.location')}</Label>
                                 <Input
                                     id="location"
                                     type="text"
@@ -146,16 +149,16 @@ function SortableItem(props: { item: Education }) {
                         </div>
                         <div>
                             <div className="grid gap-2">
-                                <Label htmlFor="description">Description</Label>
+                                <Label htmlFor="description">{t('general.description')}</Label>
                                 <QuillEditor value={props.item.description} onChange={(e) => updateField('education', e, props.item.id, 'description')} />
                             </div>
                         </div>
                         <div className="grid grid-cols-2 gap-4">
-                            <MonthSelect label="Start Month" value={props.item.startMonth} onChange={(e) => updateField('education', e, props.item.id, 'startMonth')} />
-                            <YearSelect label="Start Year" value={props.item.startYear} onChange={(e) => updateField('education', e, props.item.id, 'startYear')} />
+                            <MonthSelect label={t('general.start_month')} value={props.item.startMonth} onChange={(e) => updateField('education', e, props.item.id, 'startMonth')} />
+                            <YearSelect label={t('general.start_year')} value={props.item.startYear} onChange={(e) => updateField('education', e, props.item.id, 'startYear')} />
 
-                            <MonthSelect label="End Month" value={props.item.endMonth} onChange={(e) => updateField('education', e, props.item.id, 'endMonth')} />
-                            <YearSelect label="End Year" value={props.item.endYear} onChange={(e) => updateField('education', e, props.item.id, 'endYear')} />
+                            <MonthSelect label={t('general.end_month')} value={props.item.endMonth} onChange={(e) => updateField('education', e, props.item.id, 'endMonth')} />
+                            <YearSelect label={t('general.end_year')} value={props.item.endYear} onChange={(e) => updateField('education', e, props.item.id, 'endYear')} />
                         </div>
                     </AccordionContent>
                 </AccordionItem>

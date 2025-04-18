@@ -35,8 +35,10 @@ import {
 } from "~/components/ui/select";
 import { Button } from "~/components/ui/button";
 import YearSelect from "~/components/year-select";
+import { useTranslation } from "react-i18next";
 
 export default function MakerExperienceOther() {
+  const { t } = useTranslation();
   const { formData, updateField } = useFormStore();
 
   const sensors = useSensors(
@@ -70,9 +72,9 @@ export default function MakerExperienceOther() {
       >
         <div className="flex flex-col gap-2">
           <div className="flex justify-between items-center">
-            <p>Achievements/Publication/Other</p>
+            <p>{t('otherExperience.other_experience_block')}</p>
             <Button onClick={addOtherExperience} size={"sm"}>
-              <PlusCircle /> New
+              <PlusCircle /> {t('general.add')}
             </Button>
           </div>
           {formData.other_experiences.map((x, idx) => (
@@ -102,6 +104,7 @@ export default function MakerExperienceOther() {
 }
 
 function SortableItem(props: { item: OtherExperience }) {
+  const { t } = useTranslation();
   const { formData, updateField } = useFormStore();
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id: props.item.id });
@@ -139,7 +142,7 @@ function SortableItem(props: { item: OtherExperience }) {
           <AccordionContent className="flex flex-col gap-2">
             <div className="grid grid-cols-2 gap-2">
               <div className="grid gap-2">
-                <Label htmlFor="category">Category</Label>
+                <Label htmlFor="category">{t('general.category')}</Label>
                 <Select
                   value={props.item.category}
                   onValueChange={(e) =>
@@ -152,15 +155,15 @@ function SortableItem(props: { item: OtherExperience }) {
                   }
                 >
                   <SelectTrigger>
-                    <SelectValue placeholder={"Select a category"} />
+                    <SelectValue placeholder={t('general.select_category_label')} />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectGroup>
                       {[
-                        "Achievements",
-                        "Publication",
-                        "Course",
-                        "Webinars Attended",
+                        t('otherExperience.achievements'),
+                        t('otherExperience.publication'),
+                        t('otherExperience.course'),
+                        t('otherExperience.webinars_attended'),
                       ].map((x, idx) => (
                         <SelectItem key={idx} value={x}>
                           {x}
@@ -171,7 +174,7 @@ function SortableItem(props: { item: OtherExperience }) {
                 </Select>
               </div>
               <YearSelect
-                label="Start Year"
+                label={t('general.year')}
                 value={props.item.year || ""}
                 onChange={(e) =>
                   updateField("other_experiences", e, props.item.id, "year")
@@ -179,7 +182,7 @@ function SortableItem(props: { item: OtherExperience }) {
               />
             </div>
             <div className="grid gap-2">
-              <Label htmlFor="elaboration">Elaboration</Label>
+              <Label htmlFor="elaboration">{t('general.elaboration')}</Label>
               <Input
                 id="elaboration"
                 type="text"

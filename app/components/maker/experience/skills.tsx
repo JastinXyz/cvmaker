@@ -34,8 +34,10 @@ import {
   SelectItem,
 } from "~/components/ui/select";
 import { Button } from "~/components/ui/button";
+import { useTranslation } from "react-i18next";
 
 export default function MakerExperienceSkills() {
+  const { t } = useTranslation();
   const { formData, updateField } = useFormStore();
 
   const sensors = useSensors(
@@ -64,9 +66,9 @@ export default function MakerExperienceSkills() {
       >
         <div className="flex flex-col gap-2">
           <div className="flex justify-between items-center">
-            <p>Skills</p>
+            <p>{t('skills.skills')}</p>
             <Button onClick={addSkills} size={"sm"}>
-              <PlusCircle /> New
+              <PlusCircle /> {t('general.add')}
             </Button>
           </div>
           {formData.skills.map((x, idx) => (
@@ -89,6 +91,7 @@ export default function MakerExperienceSkills() {
 }
 
 function SortableItem(props: { item: Skills }) {
+  const { t } = useTranslation();
   const { formData, updateField } = useFormStore();
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id: props.item.id });
@@ -126,7 +129,7 @@ function SortableItem(props: { item: Skills }) {
           <AccordionContent className="flex flex-col gap-2">
             <div className="grid grid-cols-2 gap-2">
               <div className="grid gap-2">
-                <Label htmlFor="name">Name</Label>
+                <Label htmlFor="name">{t('general.name')}</Label>
                 <Input
                   id="name"
                   type="text"
@@ -138,7 +141,7 @@ function SortableItem(props: { item: Skills }) {
                 />
               </div>
               <div className="grid gap-2">
-                <Label htmlFor="level">Level</Label>
+                <Label htmlFor="level">{t('general.level')}</Label>
                 <Select
                   value={props.item.level}
                   onValueChange={(e) =>
@@ -146,16 +149,16 @@ function SortableItem(props: { item: Skills }) {
                   }
                 >
                   <SelectTrigger>
-                    <SelectValue placeholder={"Select a level"} />
+                    <SelectValue placeholder={t('general.select_level_label')} />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectGroup>
                       {[
-                        "Beginner",
-                        "Intermediate",
-                        "Advanced",
-                        "Expert",
-                        "Master",
+                        t('levels.beginner'),
+                        t('levels.intermediate'),
+                        t('levels.advanced'),
+                        t('levels.expert'),
+                        t('levels.master'),
                       ].map((x, idx) => (
                         <SelectItem key={idx} value={x}>
                           {x}

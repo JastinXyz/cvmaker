@@ -1,3 +1,4 @@
+import { t } from "i18next";
 import React from "react";
 import { Label } from "~/components/ui/label";
 import {
@@ -27,8 +28,8 @@ const months = Array.from({ length: 12 }, (_, i) =>
 const MonthSelect: React.FC<MonthSelectProps> = ({
   value,
   onChange,
-  label = "Month",
-  placeholder = "Select a month",
+  label,
+  placeholder = t('general.select_month_label'),
 }) => {
   return (
     <div className="grid gap-2">

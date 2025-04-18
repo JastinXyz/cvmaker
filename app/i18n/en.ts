@@ -1,6 +1,77 @@
 export default {
-    "back": "Back",
-    "continue": "Continue",
-    "language": "Language",
-    "personal_information": "Personal Information"
-}
+    navigation: {
+      back: "Back",
+      continue: "Continue",
+      save: "Save Changes",
+      clear: "Clear",
+    },
+    general: {
+      language: "Language",
+      add: "Add",
+      name: "Name",
+      title: "Title",
+      description: "Description",
+      level: "Level",
+      category: "Category",
+      elaboration: "Elaboration",
+      year: "Year",
+      start_month: "Start Month",
+      start_year: "Start Year",
+      end_month: "End Month",
+      end_year: "End Year",
+      select_month_label: "Select a month",
+      select_year_label: "Select a year",
+      select_level_label: "Select a level",
+      select_category_label: "Select a category",
+    },
+    personalInformation: {
+      personal_information: "Personal Information",
+      email_address: "Email Address",
+      phone_number: "Phone Number",
+      website: "Website",
+      address: "Address",
+    },
+    workExperience: {
+      work_experience: "Work Experience",
+      company: "Company",
+      position: "Position",
+      location: "Location",
+    },
+    education: {
+      education: "Education",
+      school_name: "Scholl Name",
+      degree: "Degree",
+    },
+    otherExperience: {
+      other_experience: "Other Experience",
+      other_experience_block: "Achievements/Publications/Other",
+      achievements: "Achievements",
+      publication: "Publication",
+      course: "Course",
+      webinars_attended: "Webinars Attended",
+    },
+    skills: {
+      skills: "Skills",
+    },
+    levels: {
+      beginner: "Beginner", 
+      elementary: "Elementary",
+      intermediate: "Intermediate",
+      upper_intermediate: "Upper Intermediate",
+      advanced: "Advanced",
+      proficient: "Proficient",
+      expert: "Expert",
+      master: "Master",
+    },
+    interest: {
+      interest: "Interest",
+    },
+    customBlocks: {
+      custom_blocks: "Custom Blocks",
+    },
+    upload: {
+      upload_image: "Upload Your Image",
+      click_to_upload: "Click To Upload",
+    },
+  };
+  

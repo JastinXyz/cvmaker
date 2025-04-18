@@ -26,8 +26,10 @@ import { Label } from "../../ui/label";
 import { Input } from "../../ui/input";
 import { useFormStore } from "~/hooks/use-form-store";
 import { Button } from "~/components/ui/button";
+import { useTranslation } from "react-i18next";
 
 export default function MakerExperienceInterest() {
+  const { t } = useTranslation();
   const { formData, updateField } = useFormStore();
 
   const sensors = useSensors(
@@ -56,9 +58,9 @@ export default function MakerExperienceInterest() {
       >
         <div className="flex flex-col gap-2">
           <div className="flex justify-between items-center">
-            <p>Interest</p>
+            <p>{t('interest.interest')}</p>
             <Button onClick={addInterest} size={"sm"}>
-              <PlusCircle /> New
+              <PlusCircle /> {t('general.add')}
             </Button>
           </div>
           {formData.interest.map((x, idx) => (
@@ -83,6 +85,7 @@ export default function MakerExperienceInterest() {
 }
 
 function SortableItem(props: { item: Interest }) {
+  const { t } = useTranslation();
   const { formData, updateField } = useFormStore();
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id: props.item.id });
@@ -120,7 +123,7 @@ function SortableItem(props: { item: Interest }) {
           <AccordionContent className="flex flex-col gap-2">
             <div>
               <div className="grid gap-2">
-                <Label htmlFor="name">Name</Label>
+                <Label htmlFor="name">{t('general.name')}</Label>
                 <Input
                   id="name"
                   type="text"

@@ -1,3 +1,4 @@
+import { t } from "i18next";
 import React, { useMemo } from "react";
 import { Label } from "~/components/ui/label";
 import {
@@ -21,8 +22,8 @@ type YearSelectProps = {
 const YearSelect: React.FC<YearSelectProps> = ({
   value,
   onChange,
-  label = "Year",
-  placeholder = "Select a year",
+  label,
+  placeholder = t('general.select_year_label'),
   range = 56,
   fromYear,
 }) => {

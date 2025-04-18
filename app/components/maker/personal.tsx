@@ -8,9 +8,12 @@ import { useFormStore } from "~/hooks/use-form-store";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
+import { useTranslation } from "react-i18next";
 
 export default function MakerPersonal() {
   const { formData, updateField } = useFormStore();
+  const { t } = useTranslation();
+  
   return (
     <>
       <div className="grid grid-cols-5">
@@ -19,7 +22,7 @@ export default function MakerPersonal() {
         </div>
         <div className="col-span-3 flex flex-col gap-4">
           <div className="grid gap-2">
-            <Label htmlFor="name">Name</Label>
+            <Label htmlFor="name">{t('general.name')}</Label>
             <Input
               id="name"
               type="text"
@@ -29,7 +32,7 @@ export default function MakerPersonal() {
             />
           </div>
           <div className="grid gap-2">
-            <Label htmlFor="email">Email</Label>
+            <Label htmlFor="email">{t('personalInformation.email_address')}</Label>
             <Input
               id="email"
               type="email"
@@ -42,7 +45,7 @@ export default function MakerPersonal() {
       </div>
       <div className="mt-5 flex flex-col gap-4">
         <div className="grid gap-2">
-          <Label htmlFor="phone">Phone Number</Label>
+          <Label htmlFor="phone">{t('personalInformation.phone_number')}</Label>
           <Input
             id="phone"
             type="text"
@@ -63,7 +66,7 @@ export default function MakerPersonal() {
             />
           </div>
           <div className="grid gap-2">
-            <Label htmlFor="website">Website</Label>
+            <Label htmlFor="website">{t('personalInformation.website')}</Label>
             <Input
               id="website"
               type="text"
@@ -74,7 +77,7 @@ export default function MakerPersonal() {
           </div>
         </div>
         <div className="grid gap-2">
-          <Label htmlFor="address">Adress</Label>
+          <Label htmlFor="address">{t('personalInformation.address')}</Label>
           <Input
             id="address"
             type="text"
@@ -84,7 +87,7 @@ export default function MakerPersonal() {
           />
         </div>
         <div className="grid gap-2">
-          <Label htmlFor="short_description">Short Description</Label>
+          <Label htmlFor="short_description">{t('general.description')}</Label>
           <Textarea 
             id="short_description" 
             value={formData.short_description}
@@ -98,6 +101,7 @@ export default function MakerPersonal() {
 
 function InputAvatar() {
     const inputImageRef = useRef<HTMLInputElement>(null);
+    const { t } = useTranslation();
     const { formData, updateField } = useFormStore();
 
     const [openImageDialog, setOpenImageDialog] = useState(false);
@@ -162,13 +166,13 @@ function InputAvatar() {
                 ) : (
                   <button className="rounded border-2 w-38 h-38 flex flex-col justify-center items-center text-xs">
                       <UploadCloudIcon />
-                      <p>Upload Image</p>
+                      <p>{t('upload.upload_image')}</p>
                   </button>
                 )}
               </DialogTrigger>
               <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
-                  <DialogTitle>Upload your image</DialogTitle>
+                  <DialogTitle>{t('upload.upload_image')}</DialogTitle>
                 </DialogHeader>
                 <div>
                   <input
@@ -193,7 +197,7 @@ function InputAvatar() {
                   ) : (
                     <button onClick={() => inputImageRef.current?.click()} className="w-full border-dashed border-2 rounded p-6 flex flex-col justify-center items-center text-xs">
                       <UploadCloudIcon />
-                      <p>Click To Upload</p>
+                      <p>{t('upload.click_to_upload')}</p>
                     </button>
                   )}
                 </div>
@@ -202,9 +206,9 @@ function InputAvatar() {
                     <Button variant="neutral" onClick={() => {
                       updateField('croppedImage', null)
                       setImageSrc(null)
-                    }}>Clear</Button>
+                    }}>{t('navigation.clear')}</Button>
                   </DialogClose>
-                  <Button onClick={showCroppedImage} disabled={!imageSrc}>Save changes</Button>
+                  <Button onClick={showCroppedImage} disabled={!imageSrc}>{t('navigation.save')}</Button>
                 </DialogFooter>
               </DialogContent>
           </Dialog>

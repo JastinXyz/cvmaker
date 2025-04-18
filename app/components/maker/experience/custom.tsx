@@ -27,8 +27,10 @@ import { Input } from "../../ui/input";
 import { useFormStore } from "~/hooks/use-form-store";
 import { Button } from "~/components/ui/button";
 import QuillEditor from "~/components/quill-editor";
+import { useTranslation } from "react-i18next";
 
 export default function MakerExperienceCustom() {
+  const { t } = useTranslation();
   const { formData, updateField } = useFormStore();
 
   const sensors = useSensors(
@@ -61,9 +63,9 @@ export default function MakerExperienceCustom() {
       >
         <div className="flex flex-col gap-2">
           <div className="flex justify-between items-center">
-            <p>Custom Block</p>
+            <p>{t('customBlocks.custom_blocks')}</p>
             <Button onClick={addCustomExperiences} size={"sm"}>
-              <PlusCircle /> New
+              <PlusCircle /> {t('general.add')}
             </Button>
           </div>
           {formData.custom_experiences.map((x, idx) => (
@@ -93,6 +95,7 @@ export default function MakerExperienceCustom() {
 }
 
 function SortableItem(props: { item: CustomExperience }) {
+  const { t } = useTranslation();
   const { formData, updateField } = useFormStore();
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id: props.item.id });
@@ -129,7 +132,7 @@ function SortableItem(props: { item: CustomExperience }) {
           </AccordionTrigger>
           <AccordionContent className="flex flex-col gap-2">
             <div className="grid gap-2">
-              <Label htmlFor="name">Title</Label>
+              <Label htmlFor="name">{t('general.title')}</Label>
               <Input
                 id="name"
                 type="text"
@@ -146,7 +149,7 @@ function SortableItem(props: { item: CustomExperience }) {
               />
             </div>
             <div className="grid gap-2">
-              <Label htmlFor="description">Description</Label>
+              <Label htmlFor="description">{t('general.description')}</Label>
               <QuillEditor
                 value={props.item.description}
                 onChange={(e) =>
