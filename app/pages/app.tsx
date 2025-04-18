@@ -49,7 +49,7 @@ export function AppPage() {
   const [currentStep, setCurrentStep] = useState(0);
   const { formData, setActiveForm, formExists } = useFormStore();
   const [searchParams] = useSearchParams();
-  const naviagte = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     let draftId = searchParams.get('draft') as string;
@@ -57,7 +57,7 @@ export function AppPage() {
     if (formExists(draftId)) {
       setActiveForm(draftId);
     } else {
-      naviagte('/');
+      navigate('/');
     }
   }, [])
 
@@ -71,7 +71,7 @@ export function AppPage() {
     if (currentStep > 0) {
       setCurrentStep(currentStep - 1);
     } else {
-      naviagte('/')
+      navigate('/')
     }
   }
   
