@@ -57,7 +57,6 @@ export function AppPage() {
 
   const nextStep = () => {
     if (currentStep < steps.length - 1) {
-      console.log(formData)
       setCurrentStep(currentStep + 1);
     }
   }

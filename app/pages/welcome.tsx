@@ -33,10 +33,6 @@ export function Welcome() {
   const [draftName, setDraftName] = useState<string>();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    console.log(Object.entries(forms))
-  }, [forms])
-
   return (
     <Card className="w-[34rem]">
       <CardHeader>
