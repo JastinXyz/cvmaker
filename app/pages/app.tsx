@@ -79,7 +79,8 @@ export function AppPage() {
   }
   
   return (
-    <Card className="w-[34rem]">
+    //min-[322px]:w-72
+    <Card className="w-full min-[364px]:w-80 min-[444px]:w-96 sm:w-[34rem]">
       <CardHeader>
         <CardTitle className="flex justify-between items-center">
           {steps[currentStep].title}
@@ -89,11 +90,11 @@ export function AppPage() {
       <CardContent>
           {steps[currentStep].component}
       </CardContent>
-      <CardFooter className="flex justify-between items-center">
-        <Button onClick={prevStep} size={'sm'} className="mr-2">
+      <CardFooter className="flex flex-col sm:gap-0 gap-2 sm:flex-row justify-between items-center">
+        <Button onClick={prevStep} size={'sm'} className="mr-2 sm:w-auto w-full">
             {t('navigation.back')}
         </Button>
-        <Button onClick={nextStep} size={'sm'} disabled={currentStep === steps.length - 1 || (currentStep !== 0 && (formData?.name === '' || formData?.email === ''))}>
+        <Button onClick={nextStep} size={'sm'} className="mr-2 sm:w-auto w-full" disabled={currentStep === steps.length - 1 || (currentStep !== 0 && (formData?.name === '' || formData?.email === ''))}>
             {t('navigation.continue')}
         </Button>
       </CardFooter>

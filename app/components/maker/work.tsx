@@ -111,11 +111,11 @@ function SortableItem(props: { item: WorkExperience }) {
               <button {...attributes} {...listeners}>
                 <GripVertical className="w-5 h-5" />
               </button>
-              <span>{props.item.company}</span>
+              <span className='line-clamp-1'>{props.item.company}</span>
             </div>
           </AccordionTrigger>
           <AccordionContent className="flex flex-col gap-2">
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               <div className="grid gap-2">
                 <Label htmlFor="company">{t('workExperience.company')}</Label>
                 <Input
@@ -155,7 +155,7 @@ function SortableItem(props: { item: WorkExperience }) {
                 <QuillEditor value={props.item.description} onChange={(e) => updateField('work_experience', e, props.item.id, 'description')} />
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4">
               <MonthSelect label={t('general.start_month')} value={props.item.startMonth} onChange={(e) => updateField('work_experience', e, props.item.id, 'startMonth')} />
               <div className="grid gap-2">
                 <Label htmlFor="start_year">{t('general.start_year')}</Label>
@@ -196,7 +196,7 @@ function SortableItem(props: { item: WorkExperience }) {
             </div>
             <div className='flex items-center gap-2 mt-2 justify-end'>
               <Checkbox checked={props.item.present} onCheckedChange={(e) => updateField("work_experience", e, props.item.id, "present")} />
-              <span>{t('workExperience.end_present')}</span>
+              <span className='sm:text-sm text-xs'>{t('workExperience.end_present')}</span>
             </div>
           </AccordionContent>
         </AccordionItem>

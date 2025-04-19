@@ -59,10 +59,11 @@ export default function MakerExperienceInterest() {
       >
         <div className="flex flex-col gap-2">
           <div className="flex justify-between items-center">
-            <p>{formData?.titles.interest}</p>
+            <p className="line-clamp-1">{formData?.titles.interest}</p>
             <div className="flex gap-2">
               <Button onClick={addInterest} size={"sm"}>
-                <PlusCircle /> {t('general.add')}
+                <PlusCircle />
+                <span className="hidden sm:block">{t('general.add')}</span>
               </Button>
               <MakerExperienceInterestSetting />
             </div>
@@ -121,7 +122,7 @@ function SortableItem(props: { item: Interest }) {
               <button {...attributes} {...listeners}>
                 <GripVertical className="w-5 h-5" />
               </button>
-              <span>{props.item.name}</span>
+              <span className="line-clamp-1">{props.item.name}</span>
             </div>
           </AccordionTrigger>
           <AccordionContent className="flex flex-col gap-2">

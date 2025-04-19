@@ -67,10 +67,11 @@ export default function MakerExperienceLanguages() {
       >
         <div className="flex flex-col gap-2">
           <div className="flex justify-between items-center">
-            <p>{formData?.titles.language}</p>
+            <p className="line-clamp-1">{formData?.titles.language}</p>
             <div className="flex gap-2">
               <Button onClick={addLanguages} size={"sm"}>
-                <PlusCircle /> {t('general.add')}
+                <PlusCircle />
+                <span className="hidden sm:block">{t('general.add')}</span>
               </Button>
               <MakerExperienceLanguagesSetting />
             </div>
@@ -131,11 +132,11 @@ function SortableItem(props: { item: Language }) {
               <button {...attributes} {...listeners}>
                 <GripVertical className="w-5 h-5" />
               </button>
-              <span>{props.item.name}</span>
+              <span className="line-clamp-1">{props.item.name}</span>
             </div>
           </AccordionTrigger>
           <AccordionContent className="flex flex-col gap-2">
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               <div className="grid gap-2">
                 <Label htmlFor="name">{t('general.name')}</Label>
                 <Input

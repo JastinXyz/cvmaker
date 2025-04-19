@@ -9,9 +9,7 @@ import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { useTranslation } from "react-i18next";
-import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { format } from 'date-fns'
-import { Calendar } from "../ui/calendar";
 
 export default function MakerPersonal() {
   const { formData, updateField } = useFormStore();
@@ -19,8 +17,8 @@ export default function MakerPersonal() {
   
   return (
     <>
-      <div className="grid grid-cols-5">
-        <div className="col-span-2">
+      <div className="grid grid-cols-1 sm:grid-cols-5">
+        <div className="col-span-2 flex justify-center sm:mb-0 mb-4">
           <InputAvatar />
         </div>
         <div className="col-span-3 flex flex-col gap-4">
@@ -47,7 +45,7 @@ export default function MakerPersonal() {
         </div>
       </div>
       <div className="mt-5 flex flex-col gap-4">
-        <div className="grid grid-cols-2 gap-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
           <div className="grid gap-2">
             <Label htmlFor="birth_place">{t('personalInformation.birth_place')}</Label>
             <Input
@@ -79,7 +77,7 @@ export default function MakerPersonal() {
             placeholder="+6281234567890"
           />
         </div>
-        <div className="grid grid-cols-2 gap-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
           <div className="grid gap-2">
             <Label htmlFor="linkedin">Linkedin Profile URL</Label>
             <Input

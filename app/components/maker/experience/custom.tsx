@@ -65,7 +65,8 @@ export default function MakerExperienceCustom() {
           <div className="flex justify-between items-center">
             <p>{t('customBlocks.custom_blocks')}</p>
             <Button onClick={addCustomExperiences} size={"sm"}>
-              <PlusCircle /> {t('general.add')}
+              <PlusCircle />
+              <span className="hidden sm:block">{t('general.add')}</span>
             </Button>
           </div>
           {formData?.custom_experiences.map((x, idx) => (
@@ -127,7 +128,7 @@ function SortableItem(props: { item: CustomExperience }) {
               <button {...attributes} {...listeners}>
                 <GripVertical className="w-5 h-5" />
               </button>
-              <span>{props.item.title}</span>
+              <span className="line-clamp-1">{props.item.title}</span>
             </div>
           </AccordionTrigger>
           <AccordionContent className="flex flex-col gap-2">

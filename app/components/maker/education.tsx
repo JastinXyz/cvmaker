@@ -110,11 +110,11 @@ function SortableItem(props: { item: Education }) {
                             <button {...attributes} {...listeners}>
                                 <GripVertical className="w-5 h-5" />
                             </button>
-                            <span>{props.item.name}</span>
+                            <span className='line-clamp-1'>{props.item.name}</span>
                         </div>
                     </AccordionTrigger>
                     <AccordionContent className="flex flex-col gap-2">
-                        <div className="grid grid-cols-2 gap-2">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                             <div className="grid gap-2">
                                 <Label htmlFor="name">{t('education.school_name')}</Label>
                                 <Input
@@ -154,7 +154,7 @@ function SortableItem(props: { item: Education }) {
                                 <QuillEditor value={props.item.description} onChange={(e) => updateField('education', e, props.item.id, 'description')} />
                             </div>
                         </div>
-                        <div className="grid grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4 mt-6 min-[322px]:mt-0">
                             <MonthSelect label={t('general.start_month')} value={props.item.startMonth} onChange={(e) => updateField('education', e, props.item.id, 'startMonth')} />
                             <div className="grid gap-2">
                               <Label htmlFor="start_year">{t('general.start_year')}</Label>

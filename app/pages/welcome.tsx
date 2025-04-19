@@ -41,7 +41,7 @@ export function Welcome() {
   }, [])
 
   return (
-    <Card className="w-[34rem]">
+    <Card className="w-full sm:w-[34rem]">
       <CardHeader>
         <CardTitle>Your Draft</CardTitle>
         <CardDescription>
@@ -52,9 +52,9 @@ export function Welcome() {
         <div className="flex flex-col gap-2">
           {Object.entries(forms).map(([id, form]) => (
               <div className="flex gap-2 items-center">
-                <Button variant={'neutral'} className="w-full" size={'sm'} asChild>
+                <Button variant={'neutral'} className="w-40 sm:w-full" size={'sm'} asChild>
                   <Link to={`/app?draft=${id}`}>
-                    {unslugify(id)} {form.name ? <span className="text-xs">- {form.name}</span> : ''}
+                    <p className="truncate">{unslugify(id)} {form.name ? <span className="text-xs">- {form.name}</span> : ''}</p>
                   </Link>
                 </Button>
                 <Button onClick={() => deleteForm(id)} variant={'danger'} size={'sm'}><Trash2 className="w-5 h-5" /></Button>

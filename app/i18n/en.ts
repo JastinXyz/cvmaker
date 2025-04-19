@@ -50,7 +50,7 @@ export default {
     },
     otherExperience: {
       other_experience: "Other Experience",
-      other_experience_block: "Achievements/Publications/Other",
+      other_experience_block: "Achievements, Publications, Other",
       achievements: "Achievements",
       publication: "Publication",
       course: "Course",

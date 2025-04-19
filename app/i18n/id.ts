@@ -50,7 +50,7 @@ export default {
     },
     otherExperience: {
       other_experience: "Pengalaman Lainnya",
-      other_experience_block: "Penghargaan/Publikasi/Lainnya",
+      other_experience_block: "Penghargaan, Publikasi, Lainnya",
       achievements: "Penghargaan",
       publication: "Publikasi",
       course: "Kursus",
