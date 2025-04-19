@@ -7,7 +7,12 @@ import { useTranslation } from 'react-i18next';
 import { format } from "date-fns";
 import { useEffect, useState } from 'react';
 import { MaterialIcon } from '~/components/pdf/material-icon';
-import { BusinessCenter, Group, Interests, Menu, School, Translate } from '@mui/icons-material';
+import Group from '@mui/icons-material/Group';
+import BusinessCenter from '@mui/icons-material/BusinessCenter';
+import Interests from '@mui/icons-material/Interests';
+import Menu from '@mui/icons-material/Menu';
+import School from '@mui/icons-material/School';
+import Translate from '@mui/icons-material/Translate';
 
 export default function Berkeley() {
     const { formData } = useFormStore();
