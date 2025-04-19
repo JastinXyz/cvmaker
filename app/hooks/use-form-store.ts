@@ -1,5 +1,5 @@
 import { t, type TFunction } from 'i18next';
-import slugify from 'slugify';
+import slug from "slug";
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import type { AvailableLanguage, FormData } from '~/types';
@@ -30,7 +30,7 @@ export const useFormStore = create<FormStoreState>()(
       formData: null, // computed on setActiveForm
 
       createForm(formName, initialData = {}) {
-        const formId = slugify(formName);
+        const formId = slug(formName);
         const newForm: FormData = {
           draft: formName,
           lang: 'en',

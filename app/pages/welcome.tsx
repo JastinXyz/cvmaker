@@ -21,7 +21,7 @@ import {
 import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
 import { useFormStore } from "~/hooks/use-form-store";
-import slugify from "slugify";
+import slug from "slug";
 import { useEffect, useState } from "react";
 import { Trash2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
@@ -81,7 +81,7 @@ export function Welcome() {
                   <Button variant="neutral">Cancel</Button>
                 </DialogClose>
                 <Button onClick={() => {
-                  let slugifyDraft = slugify(draftName as string);
+                  let slugifyDraft = slug(draftName as string);
 
                   createForm(draftName as string);
                   navigate(`/app?draft=${slugifyDraft}`)
