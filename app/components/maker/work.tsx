@@ -155,7 +155,7 @@ function SortableItem(props: { item: WorkExperience }) {
                 <QuillEditor value={props.item.description} onChange={(e) => updateField('work_experience', e, props.item.id, 'description')} />
               </div>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4 mt-4 min-[292px]:mt-0">
               <MonthSelect label={t('general.start_month')} value={props.item.startMonth} onChange={(e) => updateField('work_experience', e, props.item.id, 'startMonth')} />
               <div className="grid gap-2">
                 <Label htmlFor="start_year">{t('general.start_year')}</Label>
