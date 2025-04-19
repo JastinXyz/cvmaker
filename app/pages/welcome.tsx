@@ -38,7 +38,7 @@ export function Welcome() {
   }, [])
 
   return (
-    <Card className="w-full sm:w-[34rem]">
+    <Card className="w-full min-[300px]:w-72 min-[364px]:w-80 min-[444px]:w-96 sm:w-[34rem]">
       <CardHeader>
         <CardTitle>Your Draft</CardTitle>
         <CardDescription>
@@ -49,7 +49,7 @@ export function Welcome() {
         <div className="flex flex-col gap-2">
           {Object.entries(forms).map(([id, form]) => (
               <div className="flex gap-2 items-center">
-                <Button variant={'neutral'} className="w-40 sm:w-full" size={'sm'} asChild>
+                <Button variant={'neutral'} className="w-40 min-[300px]:w-full" size={'sm'} asChild>
                   <Link to={`/app?draft=${id}`}>
                     <p className="truncate">{form.draft ? form.draft : 'Untitled'} {form.name ? <span className="text-xs">- {form.name}</span> : ''}</p>
                   </Link>
