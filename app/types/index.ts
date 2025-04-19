@@ -55,6 +55,7 @@ export interface CustomExperience {
 
 export type AvailableLanguage = "en" | "id";
 export interface FormData {
+    draft: string;
     lang: AvailableLanguage;
     croppedImage: string | null;
     name: string;

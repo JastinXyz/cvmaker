@@ -26,9 +26,6 @@ import { useEffect, useState } from "react";
 import { Trash2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
-/** @ts-ignore */
-import unslugify from "unslugify";
-
 export function Welcome() {
   const { i18n } = useTranslation();
   const { createForm, forms, deleteForm, resetActiveForm } = useFormStore();
@@ -54,7 +51,7 @@ export function Welcome() {
               <div className="flex gap-2 items-center">
                 <Button variant={'neutral'} className="w-40 sm:w-full" size={'sm'} asChild>
                   <Link to={`/app?draft=${id}`}>
-                    <p className="truncate">{unslugify(id)} {form.name ? <span className="text-xs">- {form.name}</span> : ''}</p>
+                    <p className="truncate">{form.draft ? form.draft : 'Untitled'} {form.name ? <span className="text-xs">- {form.name}</span> : ''}</p>
                   </Link>
                 </Button>
                 <Button onClick={() => deleteForm(id)} variant={'danger'} size={'sm'}><Trash2 className="w-5 h-5" /></Button>
@@ -86,7 +83,7 @@ export function Welcome() {
                 <Button onClick={() => {
                   let slugifyDraft = slugify(draftName as string);
 
-                  createForm(slugifyDraft);
+                  createForm(draftName as string);
                   navigate(`/app?draft=${slugifyDraft}`)
                 }} disabled={!draftName}>Continue</Button>
               </DialogFooter>

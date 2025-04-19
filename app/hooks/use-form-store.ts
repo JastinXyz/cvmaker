@@ -1,4 +1,5 @@
 import { t, type TFunction } from 'i18next';
+import slugify from 'slugify';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import type { AvailableLanguage, FormData } from '~/types';
@@ -18,7 +19,7 @@ interface FormStoreState {
     id?: string,
     subField?: string
   ) => void;
-  createForm: (formId: string, initialData?: Partial<FormData>) => void;
+  createForm: (formName: string, initialData?: Partial<FormData>) => void;
 }
 
 export const useFormStore = create<FormStoreState>()(
@@ -28,8 +29,10 @@ export const useFormStore = create<FormStoreState>()(
       forms: {},
       formData: null, // computed on setActiveForm
 
-      createForm(formId, initialData = {}) {
+      createForm(formName, initialData = {}) {
+        const formId = slugify(formName);
         const newForm: FormData = {
+          draft: formName,
           lang: 'en',
           croppedImage: null,
           name: '',
