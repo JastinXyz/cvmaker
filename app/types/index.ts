@@ -7,6 +7,7 @@ export interface WorkExperience {
     startYear: string;
     endMonth: string;
     endYear: string;
+    present: boolean;
     description: string;
 }
 
@@ -52,10 +53,14 @@ export interface CustomExperience {
     description: string;
 }
 
+export type AvailableLanguage = "en" | "id";
 export interface FormData {
+    lang: AvailableLanguage;
     croppedImage: string | null;
     name: string;
     email: string;
+    birth_date: string;
+    birth_place: string;
     phone: string;
     linkedin: string;
     website: string;
@@ -68,4 +73,14 @@ export interface FormData {
     interest: Array<Interest>;
     other_experiences: Array<OtherExperience>;
     custom_experiences: Array<CustomExperience>;
+    titles: {
+        personal_information: string;
+        profile: string;
+        work_experience: string;
+        education: string;
+        skills: string;
+        language: string;
+        interest: string;
+        other: string;
+    }
 }

@@ -1,12 +1,15 @@
+import { t, type TFunction } from 'i18next';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import type { FormData } from '~/types';
+import type { AvailableLanguage, FormData } from '~/types';
 
 interface FormStoreState {
   activeFormId: string | null;
   forms: Record<string, FormData>;
   formData: FormData | null;
   setActiveForm: (formId: string) => void;
+  resetActiveForm: () => void;
+  setTitlesLanguage: (t: TFunction, lang: AvailableLanguage) => void;
   deleteForm: (formId: string) => void;
   formExists: (formId: string) => boolean;
   updateField: (
@@ -27,9 +30,12 @@ export const useFormStore = create<FormStoreState>()(
 
       createForm(formId, initialData = {}) {
         const newForm: FormData = {
+          lang: 'en',
           croppedImage: null,
           name: '',
           email: '',
+          birth_date: '',
+          birth_place: '',
           phone: '',
           linkedin: '',
           website: '',
@@ -42,6 +48,16 @@ export const useFormStore = create<FormStoreState>()(
           interest: [],
           other_experiences: [],
           custom_experiences: [],
+          titles: {
+              personal_information: t('personalInformation.personal_information'),
+              profile: t('personalInformation.profile'),
+              work_experience: t('workExperience.work_experience'),
+              education: t('education.education'),
+              skills: t('skills.skills'),
+              language: t('general.language'),
+              interest: t('interest.interest'),
+              other: t('otherExperience.other_experience_block')
+          },
           ...initialData,
         };
 
@@ -70,6 +86,39 @@ export const useFormStore = create<FormStoreState>()(
         });
       },
 
+      resetActiveForm() {
+        set({ activeFormId: null })
+      },
+
+      setTitlesLanguage(t, lang) {
+        const formId = get().activeFormId;
+        if (!formId) return;
+        
+        set((state) => {
+          const form = state.forms[formId];
+          if (!form) return {};
+
+          let updatedForm = { ...form };
+          updatedForm.lang = lang;
+          updatedForm.titles.personal_information = t('personalInformation.personal_information');
+          updatedForm.titles.profile = t('personalInformation.profile');
+          updatedForm.titles.work_experience = t('workExperience.work_experience');
+          updatedForm.titles.education = t('education.education');
+          updatedForm.titles.skills = t('skills.skills');
+          updatedForm.titles.language = t('general.language');
+          updatedForm.titles.interest = t('interest.interest');
+          updatedForm.titles.other = t('otherExperience.other_experience_block');
+
+          return {
+            forms: {
+              ...state.forms,
+              [formId]: updatedForm,
+            },
+            formData: updatedForm,
+          };
+        })
+      },
+
       updateField(field, value, id, subField) {
         const formId = get().activeFormId;
         if (!formId) return;
@@ -89,6 +138,9 @@ export const useFormStore = create<FormStoreState>()(
             const updatedArray = [...arr];
             updatedArray[index] = updatedItem;
             (updatedForm[field] as any) = updatedArray;
+          } else if(!id && subField) {
+            let d = updatedForm[field] as any;
+            d[subField] = value;
           } else {
             updatedForm[field] = value;
           }

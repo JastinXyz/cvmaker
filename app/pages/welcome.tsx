@@ -23,15 +23,22 @@ import { Label } from "~/components/ui/label";
 import { useFormStore } from "~/hooks/use-form-store";
 import slugify from "slugify";
 import { useEffect, useState } from "react";
+import { Trash2 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 /** @ts-ignore */
 import unslugify from "unslugify";
-import { Trash2 } from "lucide-react";
 
 export function Welcome() {
-  const { createForm, forms, deleteForm  } = useFormStore();
+  const { i18n } = useTranslation();
+  const { createForm, forms, deleteForm, resetActiveForm } = useFormStore();
   const [draftName, setDraftName] = useState<string>();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    resetActiveForm();
+    i18n.changeLanguage("en");
+  }, [])
 
   return (
     <Card className="w-[34rem]">

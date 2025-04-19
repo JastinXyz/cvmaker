@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
     Select,
@@ -7,12 +8,27 @@ import {
     SelectTrigger,
     SelectValue,
   } from '~/components/ui/select'
-  
+import { useFormStore } from '~/hooks/use-form-store';
+import type { AvailableLanguage } from '~/types';
 
 export default function MakerLanguage() {
-    const { i18n } = useTranslation();
+    const { t, i18n } = useTranslation();
+    const { formData, setTitlesLanguage } = useFormStore();
+
+    const changeLanguage = (x: AvailableLanguage) => {
+      i18n.changeLanguage(x).then(() => {
+        setTitlesLanguage(t, i18n.language as AvailableLanguage);
+      });
+    }
+
+    useEffect(() => {
+      i18n.changeLanguage(formData?.lang)
+    }, [formData?.lang]);
+
+    if(!formData?.lang || i18n.language !== formData.lang) return <>loading...</>
+
     return (
-        <Select onValueChange={(x) => i18n.changeLanguage(x)} defaultValue={i18n.language}>
+        <Select onValueChange={changeLanguage} defaultValue={i18n.language}>
           <SelectTrigger>
             <SelectValue placeholder="Select a language" />
           </SelectTrigger>

@@ -35,12 +35,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        <Background />
-        <div className="flex justify-center h-screen">
-          <div className="m-auto z-50 py-8">
-            {children}
-          </div>
-        </div>
+        {children}
         <ScrollRestoration />
         <Scripts />
       </body>

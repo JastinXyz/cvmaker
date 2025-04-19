@@ -20,22 +20,14 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "~/components/ui/accordion";
-import { GripVertical, PlusCircle, Trash2 } from "lucide-react";
+import { GripVertical, PlusCircle, Settings, Trash2 } from "lucide-react";
 import type { OtherExperience } from "~/types";
 import { Label } from "../../ui/label";
 import { Input } from "../../ui/input";
 import { useFormStore } from "~/hooks/use-form-store";
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-} from "~/components/ui/select";
 import { Button } from "~/components/ui/button";
-import YearSelect from "~/components/year-select";
 import { useTranslation } from "react-i18next";
+import { Dialog, DialogClose, DialogContent, DialogFooter, DialogTrigger } from "../../ui/dialog";
 
 export default function MakerExperienceOther() {
   const { t } = useTranslation();
@@ -72,10 +64,13 @@ export default function MakerExperienceOther() {
       >
         <div className="flex flex-col gap-2">
           <div className="flex justify-between items-center">
-            <p>{t('otherExperience.other_experience_block')}</p>
-            <Button onClick={addOtherExperience} size={"sm"}>
-              <PlusCircle /> {t('general.add')}
-            </Button>
+            <p>{formData?.titles.other}</p>
+            <div className="flex gap-2">
+              <Button onClick={addOtherExperience} size={"sm"}>
+                <PlusCircle /> {t('general.add')}
+              </Button>
+              <MakerExperienceOtherSetting />
+            </div>
           </div>
           {formData?.other_experiences.map((x, idx) => (
             <SortableItem key={idx} item={x} />
@@ -142,44 +137,39 @@ function SortableItem(props: { item: OtherExperience }) {
           <AccordionContent className="flex flex-col gap-2">
             <div className="grid grid-cols-2 gap-2">
               <div className="grid gap-2">
-                <Label htmlFor="category">{t('general.category')}</Label>
-                <Select
+                <Label htmlFor="category">{t('general.title')} {t('general.category')}</Label>
+                <Input
+                  id="category"
+                  type="text"
                   value={props.item.category}
-                  onValueChange={(e) =>
+                  onChange={(e) =>
                     updateField(
                       "other_experiences",
-                      e,
+                      e.target.value,
                       props.item.id,
                       "category"
                     )
                   }
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder={t('general.select_category_label')} />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectGroup>
-                      {[
-                        t('otherExperience.achievements'),
-                        t('otherExperience.publication'),
-                        t('otherExperience.course'),
-                        t('otherExperience.webinars_attended'),
-                      ].map((x, idx) => (
-                        <SelectItem key={idx} value={x}>
-                          {x}
-                        </SelectItem>
-                      ))}
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
+                  placeholder="Achievement"
+                />
               </div>
-              <YearSelect
-                label={t('general.year')}
-                value={props.item.year || ""}
-                onChange={(e) =>
-                  updateField("other_experiences", e, props.item.id, "year")
-                }
-              />
+              <div className="grid gap-2">
+                <Label htmlFor="year">{t('general.year')}</Label>
+                <Input
+                  id="year"
+                  type="number"
+                  value={props.item.year}
+                  onChange={(e) =>
+                    updateField(
+                      "other_experiences",
+                      e.target.value,
+                      props.item.id,
+                      "year"
+                    )
+                  }
+                  placeholder="2025"
+                />
+              </div>
             </div>
             <div className="grid gap-2">
               <Label htmlFor="elaboration">{t('general.elaboration')}</Label>
@@ -203,4 +193,32 @@ function SortableItem(props: { item: OtherExperience }) {
       </Accordion>
     </div>
   );
+}
+
+export function MakerExperienceOtherSetting() {
+  const { t } = useTranslation();
+  const { formData, updateField } = useFormStore();
+
+  return (
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button variant={'neutral'} size={'sm'}>
+              <Settings />
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="sm:max-w-[425px]">
+            <div className="grid gap-4">
+              <div className="grid gap-3">
+                <Label htmlFor="name">{t('general.title')}</Label>
+                <Input id="name" name="name" placeholder="My Awards" value={formData?.titles.other} onChange={(e) => updateField('titles', e.target.value, undefined, 'other')} />
+              </div>
+            </div>
+            <DialogFooter>
+              <DialogClose asChild>
+                <Button variant="neutral">{t('navigation.close')}</Button>
+              </DialogClose>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+  )
 }

@@ -1,4 +1,4 @@
-import { UploadCloudIcon } from "lucide-react";
+import { CalendarIcon, Settings, UploadCloudIcon } from "lucide-react";
 import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "../ui/dialog";
 import { Button } from "../ui/button";
 import { useCallback, useRef, useState } from "react";
@@ -9,6 +9,9 @@ import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { useTranslation } from "react-i18next";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import { format } from 'date-fns'
+import { Calendar } from "../ui/calendar";
 
 export default function MakerPersonal() {
   const { formData, updateField } = useFormStore();
@@ -44,6 +47,28 @@ export default function MakerPersonal() {
         </div>
       </div>
       <div className="mt-5 flex flex-col gap-4">
+        <div className="grid grid-cols-2 gap-2">
+          <div className="grid gap-2">
+            <Label htmlFor="birth_place">{t('personalInformation.birth_place')}</Label>
+            <Input
+              id="birth_place"
+              type="text"
+              value={formData?.birth_place}
+              onChange={(e) => updateField('birth_place', e.target.value)}
+              placeholder="Jakarta"
+            />
+          </div>
+          <div className="grid gap-2">
+            <Label htmlFor="birth_date">{t('personalInformation.birth_date')}</Label>
+            <Input
+              id="birth_date"
+              type="date"
+              className="block"
+              value={formData?.birth_date ? format(formData.birth_date, "yyyy-MM-dd") : ''}
+              onChange={(e) => updateField('birth_date', e.target.value ? new Date(e.target.value) : '')}
+            />
+          </div>
+        </div>
         <div className="grid gap-2">
           <Label htmlFor="phone">{t('personalInformation.phone_number')}</Label>
           <Input
@@ -214,4 +239,36 @@ function InputAvatar() {
           </Dialog>
         </>
     )
+}
+
+export function MakerPersonalSetting() {
+  const { t } = useTranslation();
+  const { formData, updateField } = useFormStore();
+
+  return (
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button variant={'neutral'} className="w-10 h-8">
+              <Settings />
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="sm:max-w-[425px]">
+            <div className="flex flex-col gap-4">
+              <div className="grid gap-3">
+                <Label htmlFor="name">{t('general.title')}</Label>
+                <Input id="name" name="name" placeholder="About Me" value={formData?.titles.personal_information} onChange={(e) => updateField('titles', e.target.value, undefined, 'personal_information')} />
+              </div>
+              <div className="grid gap-3">
+                <Label htmlFor="profile">{t('general.title')} {t('personalInformation.profile')}</Label>
+                <Input id="profile" name="profile" placeholder="My Profile" value={formData?.titles.profile} onChange={(e) => updateField('titles', e.target.value, undefined, 'profile')} />
+              </div>
+            </div>
+            <DialogFooter>
+              <DialogClose asChild>
+                <Button variant="neutral">{t('navigation.close')}</Button>
+              </DialogClose>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+  )
 }

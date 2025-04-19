@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useSearchParams } from "react-router";
-import MakerEducation from "~/components/maker/education";
+import MakerEducation, { MakerEducationSetting } from "~/components/maker/education";
 import MakerExperience from "~/components/maker/experience";
 import MakerLanguage from "~/components/maker/language";
-import MakerPersonal from "~/components/maker/personal";
-import MakerWork from "~/components/maker/work";
+import MakerPersonal, { MakerPersonalSetting } from "~/components/maker/personal";
+import MakerTemplate from "~/components/maker/template";
+import MakerWork, { MakerWorkSetting } from "~/components/maker/work";
 import { Button } from "~/components/ui/button"
 import {
   Card,
@@ -18,6 +19,10 @@ import { useFormStore } from "~/hooks/use-form-store";
 
 export function AppPage() {
   const { t } = useTranslation();
+  const [currentStep, setCurrentStep] = useState(0);
+  const { formData, setActiveForm, formExists } = useFormStore();
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
 
   const steps = [
     {
@@ -25,16 +30,19 @@ export function AppPage() {
         component: <MakerLanguage />,
     },
     {
-        title: t('personalInformation.personal_information'),
-        component: <MakerPersonal />
+        title: formData?.titles.personal_information,
+        component: <MakerPersonal />,
+        setting: <MakerPersonalSetting />
     },
     {
-        title: t('workExperience.work_experience'),
-        component: <MakerWork />
+        title: formData?.titles.work_experience,
+        component: <MakerWork />,
+        setting: <MakerWorkSetting />
     },
     {
-        title: t('education.education'),
-        component: <MakerEducation />
+        title: formData?.titles.education,
+        component: <MakerEducation />,
+        setting: <MakerEducationSetting />
     },
     {
         title: t('otherExperience.other_experience'),
@@ -42,14 +50,9 @@ export function AppPage() {
     },
     {
         title: "Template",
-        component: <>template</>
+        component: <MakerTemplate />
     }
   ]
-
-  const [currentStep, setCurrentStep] = useState(0);
-  const { formData, setActiveForm, formExists } = useFormStore();
-  const [searchParams] = useSearchParams();
-  const navigate = useNavigate();
 
   useEffect(() => {
     let draftId = searchParams.get('draft') as string;
@@ -78,7 +81,10 @@ export function AppPage() {
   return (
     <Card className="w-[34rem]">
       <CardHeader>
-        <CardTitle>{steps[currentStep].title}</CardTitle>
+        <CardTitle className="flex justify-between items-center">
+          {steps[currentStep].title}
+          {steps[currentStep].setting && steps[currentStep].setting}
+        </CardTitle>
       </CardHeader>
       <CardContent>
           {steps[currentStep].component}

@@ -4,6 +4,7 @@ export default {
       continue: "Lanjutkan",
       save: "Simpan Perubahan",
       clear: "Bersihkan",
+      close: "Tutup"
     },
     general: {
       language: "Bahasa",
@@ -14,6 +15,7 @@ export default {
       level: "Tingkat",
       category: "Kategori",
       elaboration: "Elaborasi",
+      present: "Sekarang",
       year: "Tahun",
       start_month: "Bulan Mulai",
       start_year: "Tahun Mulai",
@@ -26,16 +28,20 @@ export default {
     },
     personalInformation: {
       personal_information: "Informasi Pribadi",
+      profile: "Profil",
       email_address: "Alamat Email",
       phone_number: "Nomor HP",
       website: "Website",
       address: "Alamat",
+      birth_date: "Tanggal Lahir",
+      birth_place: "Tempat Lahir",
     },
     workExperience: {
       work_experience: "Pengalaman Kerja",
       company: "Perusahaan",
       position: "Posisi",
       location: "Lokasi",
+      end_present: "Saya masih bekerja disini"
     },
     education: {
       education: "Edukasi",

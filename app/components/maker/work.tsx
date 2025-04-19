@@ -20,16 +20,17 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "~/components/ui/accordion"
-import { GripVertical, PlusCircle, Trash2 } from "lucide-react";
+import { GripVertical, PlusCircle, Settings, Trash2 } from "lucide-react";
+import { Dialog, DialogClose, DialogContent, DialogFooter, DialogTrigger } from "../ui/dialog";
 import type { WorkExperience } from "~/types";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { useFormStore } from "~/hooks/use-form-store";
 import QuillEditor from "../quill-editor";
 import MonthSelect from '../month-select';
-import YearSelect from '../year-select';
 import { useTranslation } from 'react-i18next';
 import { Button } from '../ui/button';
+import { Checkbox } from '../ui/checkbox';
 
 export default function MakerWork() {
   const { t } = useTranslation();
@@ -45,7 +46,7 @@ export default function MakerWork() {
   const addWorkExperience = () => {
     updateField('work_experience', [
       ...formData?.work_experience!,
-      { id: formData?.work_experience.length.toString(), company: '', position: '', location: '', description: '', startMonth: '', startYear: '', endMonth: '', endYear: '' }
+      { id: formData?.work_experience.length.toString(), company: '', position: '', location: '', description: '', startMonth: '', startYear: '', endMonth: '', endYear: '', present: false }
     ]);
   }
 
@@ -156,14 +157,78 @@ function SortableItem(props: { item: WorkExperience }) {
             </div>
             <div className="grid grid-cols-2 gap-4">
               <MonthSelect label={t('general.start_month')} value={props.item.startMonth} onChange={(e) => updateField('work_experience', e, props.item.id, 'startMonth')} />
-              <YearSelect label={t('general.start_year')} value={props.item.startYear} onChange={(e) => updateField('work_experience', e, props.item.id, 'startYear')} />
+              <div className="grid gap-2">
+                <Label htmlFor="start_year">{t('general.start_year')}</Label>
+                <Input
+                  id="start_year"
+                  type="number"
+                  value={props.item.startYear}
+                  onChange={(e) =>
+                    updateField(
+                      "work_experience",
+                      e.target.value,
+                      props.item.id,
+                      "startYear"
+                    )
+                  }
+                  placeholder="2022"
+                />
+              </div>
 
               <MonthSelect label={t('general.end_month')} value={props.item.endMonth} onChange={(e) => updateField('work_experience', e, props.item.id, 'endMonth')} />
-              <YearSelect label={t('general.end_year')} value={props.item.endYear} onChange={(e) => updateField('work_experience', e, props.item.id, 'endYear')} />
+              <div className="grid gap-2">
+                <Label htmlFor="end_year">{t('general.end_year')}</Label>
+                <Input
+                  id="end_year"
+                  type="number"
+                  value={props.item.endYear}
+                  onChange={(e) =>
+                    updateField(
+                      "work_experience",
+                      e.target.value,
+                      props.item.id,
+                      "endYear"
+                    )
+                  }
+                  placeholder="2025"
+                />
+              </div>
+            </div>
+            <div className='flex items-center gap-2 mt-2 justify-end'>
+              <Checkbox checked={props.item.present} onCheckedChange={(e) => updateField("work_experience", e, props.item.id, "present")} />
+              <span>{t('workExperience.end_present')}</span>
             </div>
           </AccordionContent>
         </AccordionItem>
       </Accordion>
     </div>
   );
+}
+
+export function MakerWorkSetting() {
+  const { t } = useTranslation();
+  const { formData, updateField } = useFormStore();
+
+  return (
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button variant={'neutral'} className="w-10 h-8">
+              <Settings />
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="sm:max-w-[425px]">
+            <div className="grid gap-4">
+              <div className="grid gap-3">
+                <Label htmlFor="name">{t('general.title')}</Label>
+                <Input id="name" name="name" placeholder="My Work Experience" value={formData?.titles.work_experience} onChange={(e) => updateField('titles', e.target.value, undefined, 'work_experience')} />
+              </div>
+            </div>
+            <DialogFooter>
+              <DialogClose asChild>
+                <Button variant="neutral">{t('navigation.close')}</Button>
+              </DialogClose>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+  )
 }

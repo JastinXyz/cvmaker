@@ -4,6 +4,7 @@ export default {
       continue: "Continue",
       save: "Save Changes",
       clear: "Clear",
+      close: "Close"
     },
     general: {
       language: "Language",
@@ -14,6 +15,7 @@ export default {
       level: "Level",
       category: "Category",
       elaboration: "Elaboration",
+      present: "Present",
       year: "Year",
       start_month: "Start Month",
       start_year: "Start Year",
@@ -26,16 +28,20 @@ export default {
     },
     personalInformation: {
       personal_information: "Personal Information",
+      profile: "Profile",
       email_address: "Email Address",
       phone_number: "Phone Number",
       website: "Website",
       address: "Address",
+      birth_date: "Birth Date",
+      birth_place: "Birth Place",
     },
     workExperience: {
       work_experience: "Work Experience",
       company: "Company",
       position: "Position",
       location: "Location",
+      end_present: "I currently work here"
     },
     education: {
       education: "Education",

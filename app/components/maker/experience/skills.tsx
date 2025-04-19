@@ -20,7 +20,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "~/components/ui/accordion";
-import { GripVertical, PlusCircle, Trash2 } from "lucide-react";
+import { GripVertical, PlusCircle, Settings, Trash2 } from "lucide-react";
 import type { Skills } from "~/types";
 import { Label } from "../../ui/label";
 import { Input } from "../../ui/input";
@@ -35,6 +35,7 @@ import {
 } from "~/components/ui/select";
 import { Button } from "~/components/ui/button";
 import { useTranslation } from "react-i18next";
+import { Dialog, DialogClose, DialogContent, DialogFooter, DialogTrigger } from "../../ui/dialog";
 
 export default function MakerExperienceSkills() {
   const { t } = useTranslation();
@@ -66,10 +67,13 @@ export default function MakerExperienceSkills() {
       >
         <div className="flex flex-col gap-2">
           <div className="flex justify-between items-center">
-            <p>{t('skills.skills')}</p>
-            <Button onClick={addSkills} size={"sm"}>
-              <PlusCircle /> {t('general.add')}
-            </Button>
+            <p>{formData?.titles.skills}</p>
+            <div className="flex gap-2">
+              <Button onClick={addSkills} size={"sm"}>
+                <PlusCircle /> {t('general.add')}
+              </Button>
+              <MakerExperienceSkillsSetting />
+            </div>
           </div>
           {formData?.skills.map((x, idx) => (
             <SortableItem key={idx} item={x} />
@@ -174,4 +178,32 @@ function SortableItem(props: { item: Skills }) {
       </Accordion>
     </div>
   );
+}
+
+export function MakerExperienceSkillsSetting() {
+  const { t } = useTranslation();
+  const { formData, updateField } = useFormStore();
+
+  return (
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button variant={'neutral'} size={'sm'}>
+              <Settings />
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="sm:max-w-[425px]">
+            <div className="grid gap-4">
+              <div className="grid gap-3">
+                <Label htmlFor="name">{t('general.title')}</Label>
+                <Input id="name" name="name" placeholder="My Skills" value={formData?.titles.skills} onChange={(e) => updateField('titles', e.target.value, undefined, 'skills')} />
+              </div>
+            </div>
+            <DialogFooter>
+              <DialogClose asChild>
+                <Button variant="neutral">{t('navigation.close')}</Button>
+              </DialogClose>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+  )
 }
