@@ -8,4 +8,5 @@ export default [
 
     route("/template/berkeley", "pages/template/berkeley.tsx"),
     route("/template/otago", "pages/template/otago.tsx"),
+    route("/template/simple", "pages/template/simple.tsx"),
 ] satisfies RouteConfig;

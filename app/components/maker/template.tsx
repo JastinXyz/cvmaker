@@ -3,6 +3,7 @@ import { Button } from "../ui/button";
 import { ExternalLink } from "lucide-react";
 
 let templates = [
+    { name: "Simple", path: "/template/simple" },
     { name: "Berkeley", path: "/template/berkeley" },
     { name: "Otago", path: "/template/otago" },
 ]
