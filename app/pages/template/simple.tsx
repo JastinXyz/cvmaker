@@ -58,8 +58,8 @@ export function Simple({ activeFormId }: TemplateParam) {
                                     <p style={{ ...styles.h2, marginLeft: 6 }}>{formData?.titles.work_experience}</p>
                                     <div style={{ borderBottom: '1.5px solid #000', marginTop: 3 }}></div>
                                     <div style={{ display: 'flex', gap: 8, marginTop: 8 }}>
-                                        {formData?.work_experience.map((x) => (
-                                            <div style={{ display: 'flex' }}>
+                                        {formData?.work_experience.map((x, idx) => (
+                                            <div style={{ display: 'flex' }} key={idx}>
                                                 <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                                                     <div style={{ fontWeight: 600 }}><span style={{ color: styles.h1.color }}>{x.company}</span> {x.location && `- ${x.location}`}</div>
                                                     <div style={{ textTransform: 'capitalize', color: styles.h1.color }}>{x.startMonth} {x.startYear} {((x.startMonth || x.startYear) && (x.present || x.endMonth || x.endYear)) && "-"} {x.present ? t('general.present') : `${x.endMonth} ${x.endYear}`}</div>
@@ -82,8 +82,8 @@ export function Simple({ activeFormId }: TemplateParam) {
                                     <p style={{ ...styles.h2, marginLeft: 6 }}>{formData?.titles.education}</p>
                                     <div style={{ borderBottom: '1.5px solid #000', marginTop: 3 }}></div>
                                     <div style={{ display: 'flex', gap: 8, marginTop: 8 }}>
-                                        {formData?.education.map((x) => (
-                                            <div style={{ display: 'flex' }}>
+                                        {formData?.education.map((x, idx) => (
+                                            <div style={{ display: 'flex' }} key={idx}>
                                                 <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                                                     <div style={{ fontWeight: 600 }}><span style={{ color: styles.h1.color }}>{x.name}</span> {x.location && `- ${x.location}`}</div>
                                                     <div style={{ textTransform: 'capitalize', color: styles.h1.color }}>{x.startMonth} {x.startYear} {((x.startMonth || x.startYear) && (x.endMonth || x.endYear)) && "-"} {x.endMonth} {x.endYear}</div>
@@ -107,7 +107,7 @@ export function Simple({ activeFormId }: TemplateParam) {
                                     <div style={{ borderBottom: '1.5px solid #000', marginTop: 3 }}></div>
                                     <div style={{ display: 'flex', marginTop: 8, flexDirection: 'row', flexWrap: 'wrap', width: '100%'  }}>
                                         {formData?.skills.map((x, idx) => (
-                                            <div style={{ flex: '0 1 calc(33.333%)', marginTop: idx > 2 ? 6 : 0 }}>
+                                            <div key={idx} style={{ flex: '0 1 calc(33.333%)', marginTop: idx > 2 ? 6 : 0 }}>
                                                 <div style={{ fontWeight: 600, color: styles.h1.color }}>{x.name}</div>
                                                 <div style={{ fontStyle: 'italic', color: styles.h1.color }}>{x.level}</div>
                                             </div>
@@ -127,7 +127,7 @@ export function Simple({ activeFormId }: TemplateParam) {
                                     <div style={{ borderBottom: '1.5px solid #000', marginTop: 3 }}></div>
                                     <div style={{ display: 'flex', marginTop: 8, flexDirection: 'row', flexWrap: 'wrap', width: '100%'  }}>
                                         {formData?.languages.map((x, idx) => (
-                                            <div style={{ flex: '0 1 calc(33.333%)', marginTop: idx > 2 ? 6 : 0 }}>
+                                            <div key={idx} style={{ flex: '0 1 calc(33.333%)', marginTop: idx > 2 ? 6 : 0 }}>
                                                 <div style={{ fontWeight: 600, color: styles.h1.color }}>{x.name}</div>
                                                 <div style={{ fontStyle: 'italic', color: styles.h1.color }}>{x.level}</div>
                                             </div>
@@ -146,8 +146,8 @@ export function Simple({ activeFormId }: TemplateParam) {
                                     <p style={{ ...styles.h2, marginLeft: 6 }}>{formData?.titles.other}</p>
                                     <div style={{ borderBottom: '1.5px solid #000', marginTop: 3 }}></div>
                                     <div style={{ display: 'flex', marginTop: 8, gap: 2  }}>
-                                        {formData?.other_experiences.map((x) => (
-                                            <div style={{ color: styles.h1.color }}>
+                                        {formData?.other_experiences.map((x, idx) => (
+                                            <div key={idx} style={{ color: styles.h1.color }}>
                                                 {x.category && <span style={{ fontWeight: 600 }}>{x.category} {x.year && <>&nbsp;</>}</span>}
                                                 {x.year && <span>({x.year})</span>}
                                                 <span>{(x.year || x.category) && <>: </>} {x.elaboration}</span>
@@ -159,9 +159,8 @@ export function Simple({ activeFormId }: TemplateParam) {
                         </Html>
                     </View>
                 )}
-                {formData?.custom_experiences.map((x) => (
-                    <>
-                        <View style={{ marginTop: 8 }}>
+                {formData?.custom_experiences.map((x, idx) => (
+                    <View style={{ marginTop: 8 }} key={idx}>
                             <Html style={[styles.p]} stylesheet={{ p: { margin: 0 }, ol: { margin: 0 } }}>
                                 {renderMarkup(
                                     <>
@@ -181,8 +180,7 @@ export function Simple({ activeFormId }: TemplateParam) {
                                     </>
                                 )}
                             </Html>
-                        </View>
-                    </>
+                    </View>
                 ))}
             </Page>
         </Document>

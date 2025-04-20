@@ -61,10 +61,10 @@ export function Otago({ activeFormId }: TemplateParam) {
                         {renderMarkup(
                             <>
                                 <div style={{ paddingTop: 8, borderTop: "1px solid #b7b7b7", display: 'flex', flexDirection: 'row', flexWrap: 'wrap', width: '100%' }}>
-                                    {detail?.map((x) => (
+                                    {detail?.map((x, idx) => (
                                         <>
                                             {x.value && (
-                                                <div style={{ marginTop: 5, flex: '0 1 calc(33.333%)' }}>
+                                                <div key={idx} style={{ marginTop: 5, flex: '0 1 calc(33.333%)' }}>
                                                     <div style={{ fontWeight: 600, color: styles.h1.color }}>{x.title}</div>
                                                     <div style={{ textTransform: x.case ? x.case : 'none', marginTop: -4 }}>{x.value}</div>
                                                 </div>
@@ -81,8 +81,8 @@ export function Otago({ activeFormId }: TemplateParam) {
                                     <div style={{ marginTop: 8, paddingTop: 8, borderTop: "1px solid #b7b7b7" }}>
                                         <p style={styles.h2}>{formData?.titles.work_experience}</p>
                                         <div style={{ display: 'flex', gap: 8, marginTop: 10 }}>
-                                            {formData?.work_experience.map((x) => (
-                                                <div style={{ display: 'flex' }}>
+                                            {formData?.work_experience.map((x, idx) => (
+                                                <div key={idx} style={{ display: 'flex' }}>
                                                     <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                                                         <div style={{ fontWeight: 600, color: styles.h1.color }}>{x.position}</div>
                                                         <div style={{ textTransform: 'capitalize' }}>{x.startMonth} {x.startYear} {((x.startMonth || x.startYear) && (x.present || x.endMonth || x.endYear)) && "-"} {x.present ? t('general.present') : `${x.endMonth} ${x.endYear}`}</div>
@@ -98,8 +98,8 @@ export function Otago({ activeFormId }: TemplateParam) {
                                     <div style={{ marginTop: 8, paddingTop: 8, borderTop: "1px solid #b7b7b7" }}>
                                         <p style={styles.h2}>{formData?.titles.education}</p>
                                         <div style={{ display: 'flex', gap: 8, marginTop: 10 }}>
-                                            {formData?.education.map((x) => (
-                                                <div style={{ display: 'flex' }}>
+                                            {formData?.education.map((x, idx) => (
+                                                <div key={idx} style={{ display: 'flex' }}>
                                                     <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                                                         <div style={{ fontWeight: 600, color: styles.h1.color }}>{x.degree}</div>
                                                         <div style={{ textTransform: 'capitalize' }}>{x.startMonth} {x.startYear} {((x.startMonth || x.startYear) && (x.endMonth || x.endYear)) && "-"} {x.endMonth} {x.endYear}</div>
@@ -117,8 +117,8 @@ export function Otago({ activeFormId }: TemplateParam) {
                                             <div style={{ width: '50%' }}>
                                                 <p style={{...styles.h2, marginBottom: 2 }}>{formData?.titles.skills}</p>
                                                 <div style={{ display: 'flex', marginTop: 10 }}>
-                                                    {formData?.skills.map((x) => (
-                                                        <div style={{ display: 'flex', marginTop: -2, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                                                    {formData?.skills.map((x, idx) => (
+                                                        <div key={idx} style={{ display: 'flex', marginTop: -2, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                                                             <div style={{ fontWeight: 600, color: styles.h1.color }}>{x.name}</div>
                                                             <div>{x.level}</div>
                                                         </div>
@@ -132,8 +132,8 @@ export function Otago({ activeFormId }: TemplateParam) {
                                                 <div style={{ width: '50%' }}>
                                                     <p style={{...styles.h2, marginBottom: 2 }}>{formData?.titles.language}</p>
                                                     <div style={{ display: 'flex', marginTop: 10 }}>
-                                                        {formData?.languages.map((x) => (
-                                                            <div style={{ display: 'flex', marginTop: -2, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                                                        {formData?.languages.map((x, idx) => (
+                                                            <div key={idx} style={{ display: 'flex', marginTop: -2, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                                                                 <div style={{ fontWeight: 600, color: styles.h1.color }}>{x.name}</div>
                                                                 <div>{x.level}</div>
                                                             </div>
@@ -148,8 +148,8 @@ export function Otago({ activeFormId }: TemplateParam) {
                                     <div style={{ marginTop: 8, paddingTop: 8, borderTop: "1px solid #b7b7b7" }}>
                                         <p style={styles.h2}>{formData?.titles.other}</p>
                                         <div style={{ display: 'flex', marginBottom: 2, marginTop: 10 }}>
-                                            {formData?.other_experiences.map((x) => (
-                                                <div style={{ marginTop: -2 }}>
+                                            {formData?.other_experiences.map((x, idx) => (
+                                                <div key={idx} style={{ marginTop: -2 }}>
                                                     {x.category && <span style={{ fontWeight: 600, color: styles.h1.color }}>{x.category} {x.year && <>&nbsp;</>}</span>}
                                                     {x.year && <span>({x.year})</span>}
                                                     <span>{(x.year || x.category) && <>: </>} {x.elaboration}</span>
@@ -158,9 +158,9 @@ export function Otago({ activeFormId }: TemplateParam) {
                                         </div>
                                     </div>
                                 ) : null}
-                                {formData?.custom_experiences.map((x) => (
+                                {formData?.custom_experiences.map((x, idx) => (
                                     <>
-                                        <div style={{ marginTop: 8, paddingTop: 8, borderTop: "1px solid #b7b7b7" }}>
+                                        <div key={idx} style={{ marginTop: 8, paddingTop: 8, borderTop: "1px solid #b7b7b7" }}>
                                             <p style={styles.h2}>{x.title}</p>
                                             <div style={{ marginTop: 10 }} dangerouslySetInnerHTML={{ __html: `
                                                 <style>

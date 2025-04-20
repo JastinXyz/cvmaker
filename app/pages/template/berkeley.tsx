@@ -79,10 +79,10 @@ export function Berkeley({ activeFormId }: TemplateParam) {
                                         <td style={{ width: '100%' }}>
                                             <table>
                                                 <tbody>
-                                                    {detail?.map((x) => (
+                                                    {detail?.map((x, idx) => (
                                                         <>
                                                             {x.value && (
-                                                                <tr style={{ marginTop: 5 }}>
+                                                                <tr key={idx} style={{ marginTop: 5 }}>
                                                                     <td style={{ textAlign: 'left', width: '100px' }}>{x.title}</td>
                                                                     <td style={{ textTransform: x.case ? x.case : 'none', fontWeight: 600 }}>{x.value}</td>
                                                                 </tr>
@@ -117,8 +117,8 @@ export function Berkeley({ activeFormId }: TemplateParam) {
                             <Html style={[styles.p, { marginTop: 6 }]} stylesheet={{ p: { margin: 0 }, ol: { margin: 0 } }}>
                                 {renderMarkup(
                                     <div style={{ display: 'flex', gap: 8 }}>
-                                        {formData?.work_experience.map((x) => (
-                                            <div style={{ display: 'flex' }}>
+                                        {formData?.work_experience.map((x, idx) => (
+                                            <div key={idx} style={{ display: 'flex' }}>
                                                 <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                                                     <div style={{ fontWeight: 600 }}>{x.position}</div>
                                                     <div style={{ textTransform: 'capitalize' }}>{x.startMonth} {x.startYear} {((x.startMonth || x.startYear) && (x.present || x.endMonth || x.endYear)) && "-"} {x.present ? t('general.present') : `${x.endMonth} ${x.endYear}`}</div>
@@ -141,8 +141,8 @@ export function Berkeley({ activeFormId }: TemplateParam) {
                             <Html style={[styles.p, { marginTop: 6 }]} stylesheet={{ p: { margin: 0 }, ol: { margin: 0 } }}>
                                 {renderMarkup(
                                     <div style={{ display: 'flex', gap: 8 }}>
-                                        {formData?.education.map((x) => (
-                                            <div style={{ display: 'flex' }}>
+                                        {formData?.education.map((x, idx) => (
+                                            <div key={idx} style={{ display: 'flex' }}>
                                                 <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                                                     <div style={{ fontWeight: 600, textTransform: 'uppercase' }}>{x.degree}</div>
                                                     <div style={{ textTransform: 'capitalize' }}>{x.startMonth} {x.startYear} {((x.startMonth || x.startYear) && (x.endMonth || x.endYear)) && "-"} {x.endMonth} {x.endYear}</div>
@@ -166,7 +166,7 @@ export function Berkeley({ activeFormId }: TemplateParam) {
                                 {renderMarkup(
                                     <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', width: '100%' }}>
                                         {formData?.skills.map((x, idx) => (
-                                            <div style={{ flex: '0 1 calc(33.333%)', marginTop: idx > 2 ? 6 : 0 }}>
+                                            <div key={idx} style={{ flex: '0 1 calc(33.333%)', marginTop: idx > 2 ? 6 : 0 }}>
                                                 <div style={{ fontWeight: 600 }}>{x.name}</div>
                                                 <div style={{ fontStyle: 'italic', marginTop: -4 }}>{x.level}</div>
                                             </div>
@@ -186,7 +186,7 @@ export function Berkeley({ activeFormId }: TemplateParam) {
                                 {renderMarkup(
                                     <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', width: '100%' }}>
                                         {formData?.languages.map((x, idx) => (
-                                            <div style={{ flex: '0 1 calc(33.333%)', marginTop: idx > 2 ? 6 : 0 }}>
+                                            <div key={idx} style={{ flex: '0 1 calc(33.333%)', marginTop: idx > 2 ? 6 : 0 }}>
                                                 <div style={{ fontWeight: 600 }}>{x.name}</div>
                                                 <div style={{ fontStyle: 'italic', marginTop: -4 }}>{x.level}</div>
                                             </div>
@@ -205,8 +205,8 @@ export function Berkeley({ activeFormId }: TemplateParam) {
                             <Html style={[styles.p, { marginTop: 6 }]} stylesheet={{ p: { margin: 0 }, ol: { margin: 0 } }}>
                                 {renderMarkup(
                                     <div style={{ display: 'flex', gap: 2 }}>
-                                        {formData?.other_experiences.map((x) => (
-                                            <div>
+                                        {formData?.other_experiences.map((x, idx) => (
+                                            <div key={idx}>
                                                 {x.category && <span style={{ fontWeight: 600 }}>{x.category} {x.year && <>&nbsp;</>}</span>}
                                                 {x.year && <span>({x.year})</span>}
                                                 <span>{(x.year || x.category) && <>: </>} {x.elaboration}</span>
@@ -217,9 +217,9 @@ export function Berkeley({ activeFormId }: TemplateParam) {
                             </Html>
                         </>
                     )}
-                    {formData?.custom_experiences.map((x) => (
+                    {formData?.custom_experiences.map((x, idx) => (
                         <>
-                            <View style={{ backgroundColor: "#f1f1f1", marginTop: 6, padding: 7, display: "flex", flexDirection: "row", gap: 10, alignItems: 'center' }}>
+                            <View key={idx} style={{ backgroundColor: "#f1f1f1", marginTop: 6, padding: 7, display: "flex", flexDirection: "row", gap: 10, alignItems: 'center' }}>
                                 <Text style={[styles.h2]}>{x.title}</Text>
                             </View>
                             <Html style={[styles.p, { marginTop: 6 }]} stylesheet={{ p: { margin: 0 }, ol: { margin: 0 } }}>
