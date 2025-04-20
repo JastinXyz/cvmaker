@@ -13,27 +13,15 @@ import Interests from '@mui/icons-material/Interests';
 import Menu from '@mui/icons-material/Menu';
 import School from '@mui/icons-material/School';
 import Translate from '@mui/icons-material/Translate';
+import { SourceSansPro } from '~/lib/fonts';
+import type { PDFDetail } from '~/types';
 
 export default function Berkeley() {
     const { formData } = useFormStore();
     const { t } = useTranslation();
-    const [detail, setDetail] = useState<{ title: string, value?: string, case?: 'lowercase' | 'uppercase' | 'capitalize' | 'none'; }[]>();
+    const [detail, setDetail] = useState<PDFDetail[]>();
 
-    Font.register({ family: 'Source Sans Pro', fonts: [
-            { fontStyle: "normal", fontWeight: 200, src: "http://fonts.gstatic.com/s/sourcesanspro/v9/toadOcfmlt9b38dHJxOBGKXvKVW_haheDNrHjziJZVk.ttf" },
-            { fontStyle: "normal", fontWeight: 300, src: "http://fonts.gstatic.com/s/sourcesanspro/v9/toadOcfmlt9b38dHJxOBGFP7R5lD_au4SZC6Ks_vyWs.ttf" },
-            { fontStyle: "normal", fontWeight: 400, src: "http://fonts.gstatic.com/s/sourcesanspro/v9/ODelI1aHBYDBqgeIAH2zlNRl0pGnog23EMYRrBmUzJQ.ttf" },
-            { fontStyle: "normal", fontWeight: 600, src: "http://fonts.gstatic.com/s/sourcesanspro/v9/toadOcfmlt9b38dHJxOBGOiMeWyi5E_-XkTgB5psiDg.ttf" },
-            { fontStyle: "normal", fontWeight: 700, src: "http://fonts.gstatic.com/s/sourcesanspro/v9/toadOcfmlt9b38dHJxOBGPgXsetDviZcdR5OzC1KPcw.ttf" },
-            { fontStyle: "normal", fontWeight: 900, src: "http://fonts.gstatic.com/s/sourcesanspro/v9/toadOcfmlt9b38dHJxOBGBA_awHl7mXRjE_LQVochcU.ttf" },
-            { fontStyle: "italic", fontWeight: 200, src: "http://fonts.gstatic.com/s/sourcesanspro/v9/fpTVHK8qsXbIeTHTrnQH6OptKU7UIBg2hLM7eMTU8bI.ttf" },
-            { fontStyle: "italic", fontWeight: 300, src: "http://fonts.gstatic.com/s/sourcesanspro/v9/fpTVHK8qsXbIeTHTrnQH6DUpNKoQAsDux-Todp8f29w.ttf" },
-            { fontStyle: "italic", fontWeight: 400, src: "http://fonts.gstatic.com/s/sourcesanspro/v9/M2Jd71oPJhLKp0zdtTvoMwRX4TIfMQQEXLu74GftruE.ttf" },
-            { fontStyle: "italic", fontWeight: 600, src: "http://fonts.gstatic.com/s/sourcesanspro/v9/fpTVHK8qsXbIeTHTrnQH6Pp6lGoTTgjlW0sC4r900Co.ttf" },
-            { fontStyle: "italic", fontWeight: 700, src: "http://fonts.gstatic.com/s/sourcesanspro/v9/fpTVHK8qsXbIeTHTrnQH6LVT4locI09aamSzFGQlDMY.ttf" },
-            { fontStyle: "italic", fontWeight: 900, src: "http://fonts.gstatic.com/s/sourcesanspro/v9/fpTVHK8qsXbIeTHTrnQH6A0NcF6HPGWR298uWIdxWv0.ttf" },
-        ] 
-    });
+    Font.register({ family: 'Source Sans Pro', fonts: SourceSansPro as any });
 
     const styles = StyleSheet.create({
         page: { fontFamily: "Source Sans Pro", color: "#4c4c4c", fontSize: 13, padding: 28 },

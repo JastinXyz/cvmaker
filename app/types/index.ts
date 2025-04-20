@@ -85,3 +85,9 @@ export interface FormData {
         other: string;
     }
 }
+
+export interface PDFDetail { 
+    title: string, 
+    value?: string, 
+    case?: 'lowercase' | 'uppercase' | 'capitalize' | 'none'; 
+}
