@@ -1,5 +1,4 @@
 import { Page, Text, View, Document, StyleSheet, Image, Font } from '@react-pdf/renderer';
-import PDFViewerWrapper from '~/components/pdf-viewer-wrapper';
 import { useFormStore } from '~/hooks/use-form-store';
 import Html from 'react-pdf-html';
 import { renderMarkup } from '~/lib/render-markup';
@@ -15,8 +14,13 @@ import Translate from '@mui/icons-material/Translate';
 import EmojiEvents from '@mui/icons-material/EmojiEvents';
 import { SourceSansPro } from '~/lib/fonts';
 import type { PDFDetail } from '~/types';
+import PdfExport from '~/components/pdf-export';
 
-export default function Berkeley() {
+export default function SimpleBerkeley() {
+    return <PdfExport document={<Berkeley />} />
+}
+
+function Berkeley() {
     const { formData } = useFormStore();
     const { t } = useTranslation();
     const [detail, setDetail] = useState<PDFDetail[]>();
@@ -40,7 +44,6 @@ export default function Berkeley() {
     }, [formData])
     
     return (
-        <PDFViewerWrapper>
             <Document>
                 <Page size={"A4"} style={styles.page}>
                     <View style={{ display: "flex", flexDirection: "row", alignItems: 'flex-start', gap: 10 }}>
@@ -233,6 +236,5 @@ export default function Berkeley() {
 
                 </Page>
             </Document>
-        </PDFViewerWrapper>
     )
 }

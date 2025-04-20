@@ -5,14 +5,18 @@ import { useFormStore } from "~/hooks/use-form-store";
 import { SourceSansPro } from "~/lib/fonts";
 import { format } from "date-fns";
 import type { PDFDetail } from "~/types";
-import PDFViewerWrapper from "~/components/pdf-viewer-wrapper";
 import { MaterialIcon } from "~/components/pdf/material-icon";
 import Email from '@mui/icons-material/Email';
 import Home from '@mui/icons-material/Home';
 import Html from "react-pdf-html";
 import { renderMarkup } from "~/lib/render-markup";
+import PdfExport from "~/components/pdf-export";
 
-export default function Otago() {
+export default function OtagoRender() {
+    return <PdfExport document={<Otago />} />
+}
+
+function Otago() {
     const { formData } = useFormStore();
     const { t } = useTranslation();
     const [detail, setDetail] = useState<PDFDetail[]>();
@@ -37,7 +41,6 @@ export default function Otago() {
     }, [formData])
 
     return (
-        <PDFViewerWrapper>
             <Document>
                 <Page size={"A4"} style={styles.page}>
                     <View style={{ display: "flex", flexDirection: "row", alignItems: 'flex-start', gap: 10 }}>
@@ -175,6 +178,5 @@ export default function Otago() {
                     </Html>
                 </Page>
             </Document>
-        </PDFViewerWrapper>
     )
 }
