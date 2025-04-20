@@ -15,9 +15,6 @@ export default function MakerExperience() {
                 <MakerExperienceLanguages />
             </div>
             <div className='p-2 rounded border-dashed border-2'>
-                <MakerExperienceInterest />
-            </div>
-            <div className='p-2 rounded border-dashed border-2'>
                 <MakerExperienceOther />
             </div>
             <div className='p-2 rounded border-dashed border-2'>
