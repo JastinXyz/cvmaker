@@ -16,7 +16,7 @@ export default {
       category: "Category",
       elaboration: "Elaboration",
       present: "Present",
-      resume_language: "Resume Language",
+      cv_language: "CV Language",
       year: "Year",
       start_month: "Start Month",
       start_year: "Start Year",

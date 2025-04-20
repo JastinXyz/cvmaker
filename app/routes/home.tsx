@@ -3,8 +3,8 @@ import type { Route } from "./+types/home";
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "Resume Maker" },
-    { name: "description", content: "Free Resume Maker" },
+    { title: "Curriculum Vitae Builder" },
+    { name: "description", content: "Free and open source Curriculum Vitae Builder" },
   ];
 }
 

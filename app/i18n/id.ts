@@ -16,7 +16,7 @@ export default {
       category: "Kategori",
       elaboration: "Elaborasi",
       present: "Sekarang",
-      resume_language: "Bahasa di CV",
+      cv_language: "Bahasa di CV",
       year: "Tahun",
       start_month: "Bulan Mulai",
       start_year: "Tahun Mulai",

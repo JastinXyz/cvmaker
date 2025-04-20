@@ -41,7 +41,7 @@ export function Welcome() {
   return (
     <Card className="w-full min-[300px]:w-72 min-[364px]:w-80 min-[444px]:w-96 sm:w-[34rem]">
       <CardHeader>
-        <CardTitle>Resume Maker</CardTitle>
+        <CardTitle>Curriculum Vitae Bulder</CardTitle>
         <CardDescription>
           Your draft is stored locally.
         </CardDescription>
