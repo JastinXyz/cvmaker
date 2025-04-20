@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { useFormStore } from "~/hooks/use-form-store";
 import { SourceSansPro } from "~/lib/fonts";
 import { format } from "date-fns";
-import type { PDFDetail } from "~/types";
+import type { PDFDetail, TemplateParam } from "~/types";
 import { MaterialIcon } from "~/components/pdf/material-icon";
 import Email from '@mui/icons-material/Email';
 import Home from '@mui/icons-material/Home';
@@ -16,8 +16,8 @@ export default function OtagoRender() {
     return <PdfExport document={<Otago />} />
 }
 
-function Otago() {
-    const { formData } = useFormStore();
+export function Otago({ activeFormId }: TemplateParam) {
+    const { formData, setActiveForm } = useFormStore();
     const { t } = useTranslation();
     const [detail, setDetail] = useState<PDFDetail[]>();
 
@@ -29,6 +29,10 @@ function Otago() {
         h2: { fontSize: 16, textTransform: "uppercase", fontWeight: 700, letterSpacing: 2, color: '#333333' },
         p: { fontSize: 11, lineHeight: '18px' }
     })
+
+    useEffect(() => {
+        if(activeFormId) setActiveForm(activeFormId)
+    }, [activeFormId])
 
     useEffect(() => {
         setDetail([

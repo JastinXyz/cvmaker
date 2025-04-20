@@ -6,7 +6,8 @@ import { Document, Page, pdfjs } from "react-pdf";
 
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import "react-pdf/dist/Page/TextLayer.css";
-import { Loader } from 'lucide-react';
+import { Download, Loader } from 'lucide-react';
+import { Button } from './ui/button';
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   "/js/pdf.worker.min.js",
@@ -15,6 +16,8 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 
 type Props = {
   document: any;
+  download?: boolean;
+  downloadDisplay?: string;
   filename?: string;
   isLoading?: boolean;
   className?: React.CSSProperties | string;
@@ -63,15 +66,30 @@ const PdfExport = (props: Props) => {
           loading ? (
             <LoadingScreen />
           ) : (
-            <Document file={url} onLoadSuccess={({ numPages }) => setNumPages(numPages)} loading={loading ? <LoadingScreen /> : null}>
-              {Array.from(new Array(numPages), (_, index) => (
-                <Page
-                  key={`page_${index + 1}`}
-                  pageNumber={index + 1}
-                  width={parentRef.current?.clientWidth}
-                />
-              ))}
-            </Document>
+            <>
+              {props.download ? (
+                <Button variant={'neutral'} className='w-full mt-2' asChild>
+                  <a
+                    href={url!}
+                    download={props.filename || "cvmaker.pdf"}
+                  >
+                    {props.downloadDisplay || "Download PDF"} <Download />
+                  </a>
+                </Button>
+              ) : (
+                <Document file={url} onLoadSuccess={({ numPages }) => setNumPages(numPages)} loading={loading ? <LoadingScreen /> : null}>
+                  {Array.from(new Array(numPages), (_, index) => (
+                    <>
+                      <Page
+                          key={`page_${index + 1}`}
+                          pageNumber={index + 1}
+                          width={parentRef.current?.clientWidth}
+                      />
+                    </>
+                  ))}
+                </Document>
+              )}
+            </>
           )
         }
       </BlobProvider>

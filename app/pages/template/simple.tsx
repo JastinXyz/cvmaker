@@ -1,16 +1,18 @@
 import { Document, Image, Page, StyleSheet, Text, View } from "@react-pdf/renderer";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import Html from "react-pdf-html";
 import PdfExport from "~/components/pdf-export";
 import { useFormStore } from "~/hooks/use-form-store";
 import { renderMarkup } from "~/lib/render-markup";
+import type { TemplateParam } from "~/types";
 
 export default function SimpleRender() {
     return <PdfExport document={<Simple />} />
 }
 
-function Simple() {
-    const { formData } = useFormStore();
+export function Simple({ activeFormId }: TemplateParam) {
+    const { formData, setActiveForm } = useFormStore();
     const { t } = useTranslation();
 
     const styles = StyleSheet.create({
@@ -19,6 +21,10 @@ function Simple() {
         h2: { fontSize: 12, textTransform: "capitalize", fontWeight: 600, color: "#000000" },
         p: { fontSize: 9, lineHeight: '14px' }
     })
+
+    useEffect(() => {
+        if(activeFormId) setActiveForm(activeFormId)
+    }, [activeFormId])
 
     return (
         <Document>

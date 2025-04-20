@@ -91,3 +91,7 @@ export interface PDFDetail {
     value?: string, 
     case?: 'lowercase' | 'uppercase' | 'capitalize' | 'none'; 
 }
+
+export interface TemplateParam {
+    activeFormId?: string;
+}

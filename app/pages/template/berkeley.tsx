@@ -15,13 +15,14 @@ import EmojiEvents from '@mui/icons-material/EmojiEvents';
 import { SourceSansPro } from '~/lib/fonts';
 import type { PDFDetail } from '~/types';
 import PdfExport from '~/components/pdf-export';
+import type { TemplateParam } from "~/types";
 
-export default function SimpleBerkeley() {
+export default function BerkeleyRender() {
     return <PdfExport document={<Berkeley />} />
 }
 
-function Berkeley() {
-    const { formData } = useFormStore();
+export function Berkeley({ activeFormId }: TemplateParam) {
+    const { formData, setActiveForm } = useFormStore();
     const { t } = useTranslation();
     const [detail, setDetail] = useState<PDFDetail[]>();
 
@@ -33,6 +34,10 @@ function Berkeley() {
         h2: { fontSize: 13 },
         p: { fontSize: 11, lineHeight: '18px' }
     })
+
+    useEffect(() => {
+        if(activeFormId) setActiveForm(activeFormId)
+    }, [activeFormId])
 
     useEffect(() => {
         setDetail([
