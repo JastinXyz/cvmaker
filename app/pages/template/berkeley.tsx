@@ -58,7 +58,7 @@ export default function Berkeley() {
             <Document>
                 <Page size={"A4"} style={styles.page}>
                     <View style={{ display: "flex", flexDirection: "row", alignItems: 'flex-start', gap: 10 }}>
-                        <Image src={formData?.croppedImage!} style={{ width: 45, height: 45, borderRadius: 50 }} />
+                        {formData?.croppedImage && <Image src={formData?.croppedImage} style={{ width: 45, height: 45, borderRadius: 50 }} />}
                         <Html stylesheet={{ p: { margin: 0 }, ol: { margin: 0 } }}>
                             {renderMarkup(
                                 <>
