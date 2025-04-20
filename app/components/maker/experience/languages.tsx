@@ -169,11 +169,12 @@ function SortableItem(props: { item: Language }) {
                     <SelectGroup>
                       {[
                         t('levels.beginner'),
-                        t('levels.elementary'),
+                        t('levels.lower_intermediate'),
                         t('levels.intermediate'),
                         t('levels.upper_intermediate'),
-                        t('levels.advanced'),
-                        t('levels.proficient'),
+                        t('levels.fluent'),
+                        t('levels.very_fluent'),
+                        t('levels.native'),
                       ].map((x, idx) => (
                         <SelectItem key={idx} value={x}>
                           {x}

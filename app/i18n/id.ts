@@ -64,10 +64,14 @@ export default {
       elementary: "Dasar",
       intermediate: "Menengah",
       upper_intermediate: "Menengah Atas",
-      advanced: "Lanjutan",
-      proficient: "Mahir",
+      advanced: "Mahir",
+      proficient: "Profesional",
       expert: "Ahli",
-      master: "Master",
+      master: "Penguasaan penuh",
+      lower_intermediate: "Menengah Bawah",
+      fluent: "Lancar",
+      very_fluent: "Sangat Lancar",
+      native: "Penutur Asli"
     },
     interest: {
       interest: "Minat",

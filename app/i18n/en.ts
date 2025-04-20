@@ -67,7 +67,11 @@ export default {
       advanced: "Advanced",
       proficient: "Proficient",
       expert: "Expert",
-      master: "Master",
+      master: "Mastery",
+      lower_intermediate: "Lower Intermediate",
+      fluent: "Fluent",
+      very_fluent: "Very Fluent",
+      native: "Native"
     },
     interest: {
       interest: "Interest",
