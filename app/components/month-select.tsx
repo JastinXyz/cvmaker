@@ -1,5 +1,6 @@
 import { t } from "i18next";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { Label } from "~/components/ui/label";
 import {
   Select,
@@ -9,6 +10,7 @@ import {
   SelectGroup,
   SelectItem,
 } from "~/components/ui/select";
+import type { AvailableLanguage } from "~/types";
 
 type MonthSelectProps = {
   value: string;
@@ -17,13 +19,15 @@ type MonthSelectProps = {
   placeholder?: string;
 };
 
-const months = Array.from({ length: 12 }, (_, i) =>
-  new Date(0, i).toLocaleString("default", { month: "short" })
-).map((label, i) => ({
-  label,
-  value: label.toLowerCase(),
-  key: i,
-}));
+const months = (locale: AvailableLanguage) => {
+  return Array.from({ length: 12 }, (_, i) =>
+    new Date(0, i).toLocaleString(locale, { month: "short" })
+  ).map((label, i) => ({
+    label,
+    value: label.toLowerCase(),
+    key: i,
+  }));
+}
 
 const MonthSelect: React.FC<MonthSelectProps> = ({
   value,
@@ -31,6 +35,8 @@ const MonthSelect: React.FC<MonthSelectProps> = ({
   label,
   placeholder = t('general.select_month_label'),
 }) => {
+  let { i18n } = useTranslation();
+
   return (
     <div className="grid gap-2">
       <Label>{label}</Label>
@@ -40,7 +46,7 @@ const MonthSelect: React.FC<MonthSelectProps> = ({
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
-            {months.map(({ label, value, key }) => (
+            {months(i18n.language as AvailableLanguage).map(({ label, value, key }) => (
               <SelectItem key={key} value={value}>
                 {label}
               </SelectItem>
