@@ -184,10 +184,10 @@ function InputAvatar() {
                   <img
                     src={formData?.croppedImage}
                     alt="Avatar"
-                    className="w-38 h-38 rounded border-2"
+                    className="w-38 h-38 rounded border-2 cursor-pointer"
                   />
                 ) : (
-                  <button className="rounded border-2 w-38 h-38 flex flex-col justify-center items-center text-xs">
+                  <button className="cursor-pointer rounded border-2 w-38 h-38 flex flex-col justify-center items-center text-xs">
                       <UploadCloudIcon />
                       <p>{t('upload.upload_image')}</p>
                   </button>
@@ -218,7 +218,7 @@ function InputAvatar() {
                         />
                       </div>
                   ) : (
-                    <button onClick={() => inputImageRef.current?.click()} className="w-full border-dashed border-2 rounded p-6 flex flex-col justify-center items-center text-xs">
+                    <button onClick={() => inputImageRef.current?.click()} className="cursor-pointer w-full border-dashed border-2 rounded p-6 flex flex-col justify-center items-center text-xs">
                       <UploadCloudIcon />
                       <p>{t('upload.click_to_upload')}</p>
                     </button>
