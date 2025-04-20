@@ -6,9 +6,7 @@ export default [
         route("app", "routes/app.tsx"),
     ]),
 
-    layout("pages/template/layout.tsx", [
-        route("/template/berkeley", "pages/template/berkeley.tsx"),
-        route("/template/otago", "pages/template/otago.tsx"),
-        route("/template/simple", "pages/template/simple.tsx"),
-    ])
+    route("/template/berkeley", "pages/template/berkeley.tsx"),
+    route("/template/otago", "pages/template/otago.tsx"),
+    route("/template/simple", "pages/template/simple.tsx"),
 ] satisfies RouteConfig;

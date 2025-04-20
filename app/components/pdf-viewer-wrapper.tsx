@@ -34,7 +34,7 @@ export default function PDFViewerWrapper({ children }: { children: ReactElement<
   if (!PDFViewer) return null;
 
   return (
-    <main className='h-[33rem]'>
+    <main className='w-screen h-screen'>
         <div className="h-full flex-1">
             <PDFViewer showToolbar={false} className="size-full">
                 {children}
