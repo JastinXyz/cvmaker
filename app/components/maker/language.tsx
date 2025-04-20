@@ -28,16 +28,26 @@ export default function MakerLanguage() {
     if(!formData?.lang || i18n.language !== formData.lang) return <>loading...</>
 
     return (
-        <Select onValueChange={changeLanguage} defaultValue={i18n.language}>
-          <SelectTrigger>
-            <SelectValue placeholder="Select a language" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              <SelectItem value="en">English</SelectItem>
-              <SelectItem value="id">Bahasa Indonesia</SelectItem>
-            </SelectGroup>
-          </SelectContent>
-        </Select>
+        <>
+          <Select onValueChange={changeLanguage} defaultValue={i18n.language}>
+            <SelectTrigger>
+              <SelectValue placeholder="Select a language" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectItem value="en">English</SelectItem>
+                <SelectItem value="id">Bahasa Indonesia</SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+          <div className='mt-4 text-xs'>
+            <p>{t('notes.note')}:</p>
+            <ul className='list-disc list-inside ml-4'>
+              <li>{t('notes.stored_locally')}</li>
+              <li>{t('notes.most_optional')}</li>
+              <li>{t('notes.better_result')}</li>
+            </ul>
+          </div>
+        </>
     )
 }

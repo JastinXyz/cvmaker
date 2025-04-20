@@ -26,7 +26,7 @@ export function AppPage() {
 
   const steps = [
     {
-        title: t('general.language'),
+        title: t('general.resume_language'),
         component: <MakerLanguage />,
     },
     {

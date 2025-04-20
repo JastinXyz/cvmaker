@@ -16,6 +16,7 @@ export default {
       category: "Category",
       elaboration: "Elaboration",
       present: "Present",
+      resume_language: "Resume Language",
       year: "Year",
       start_month: "Start Month",
       start_year: "Start Year",
@@ -83,5 +84,11 @@ export default {
       upload_image: "Upload Your Image",
       click_to_upload: "Click To Upload",
     },
+    notes: {
+      note: "Note",
+      stored_locally: "Draft is only saved locally, there is no sending of your data to the server.",
+      most_optional: "Most fields are optional, but some fields like name and email are required.",
+      better_result: "You can leave some input fields unfilled so that the results will be much better."
+    }
   };
   
